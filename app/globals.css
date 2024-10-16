@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:wght@400;700&family=Lobster&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,21 +9,18 @@
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.calc-height {
+  min-height: calc(100svh - 30px); /* Replace 100px with your desired value */
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.font-pacifico {
+  font-family: "Pacifico", cursive;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.font-playfair {
+  font-family: "Playfair Display", serif;
+}
+
+.font-lobster {
+  font-family: "Lobster", cursive;
 }

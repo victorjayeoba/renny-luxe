@@ -1,100 +1,164 @@
-import Image from "next/image";
+"use client"
+
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import lady from "./assets/images/skincare_2.png"
+import Header from './common/Header';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [cart, setCart] = useState({});
+  const [wishlist, setWishlist] = useState([]);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const featuredProducts = [
+    { id: 1, name: 'Luxury Perfume', price: 120 },
+    { id: 2, name: 'Glow Skin Cream', price: 85 },
+  ];
+
+  const latestProducts = [
+    { id: 3, name: 'Silky Deodorant', price: 20 },
+    { id: 4, name: 'Aqua Body Lotion', price: 45 },
+  ];
+
+  const addToCart = (id) => {
+    setCart((prevCart) => ({
+      ...prevCart,
+      [id]: (prevCart[id] || 0) + 1,
+    }));
+  };
+
+  const addToWishlist = (id) => {
+    if (!wishlist.includes(id)) {
+      setWishlist([...wishlist, id]);
+    }
+  };
+
+  const productCard = (product, isFeatured = false) => (
+    <motion.div
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      className="bg-white rounded-lg shadow-lg p-6 m-4 w-full sm:w-64"
+      key={product.id}
+    >
+      <h3 className="text-xl font-bold mb-2 text-gray-900">{product.name}</h3>
+      <p className="text-gray-600 mb-4">${product.price}</p>
+      <div className="flex justify-between items-center">
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={() => addToCart(product.id)}
+          className="px-4 py-2 bg-blue-500 text-white rounded-full shadow-lg focus:outline-none"
+        >
+          Add to Cart {cart[product.id] ? `(${cart[product.id]})` : ''}
+        </motion.button>
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={() => addToWishlist(product.id)}
+          className={`px-4 py-2 ${wishlist.includes(product.id) ? 'bg-red-500' : 'bg-gray-300'
+            } text-white rounded-full shadow-lg focus:outline-none`}
+        >
+          {wishlist.includes(product.id) ? 'In Wishlist' : 'Add to Wishlist'}
+        </motion.button>
+      </div>
+    </motion.div>
+  );
+
+  return (
+    <div className="bg-gray-100 min-h-screen flex flex-col justify-between">
+      {/* Header */}
+      <Header />
+      {/* Intro Section */}
+      <section className="bg-[#D2B48C] text-white ">
+        <div className=" container mx-auto calc-height flex flex-col lg:flex-row items-center px-6">
+          <div className="lg:w-1/2 max-lg:py-5 ">
+            <motion.h2
+              className="text-4xl font-bold mb-4 font-lobster "
+              initial={{ opacity: 0, x: -100 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <span> Welcome to</span>
+              <br />   <span className='text-7xl text-red-200'> Rennys Luxe</span>
+            </motion.h2>
+            <motion.p
+              className="text-lg mb-6 "
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+            >
+              Explore Our Handpicked Selection of <br className='hidden lg:block' />  Fragrances and Skincare Essentials Designed  to <br className='hidden lg:block' /> Illuminate Your Natural Beauty.
+            </motion.p>
+            <motion.div
+              className="text-lg mb-6 "
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+            >
+              <div>
+
+              </div>
+            </motion.div>
+
+          </div>
+          <div className='bg-red-200 overflow-hidden'>
+            <motion.div
+              className=""
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+            >
+              <Image
+                src={lady}
+                alt="Skincare Lady"
+                width={500}
+                height={500}
+                layout='esponsive'
+                className=" w-full block"
+              />
+            </motion.div>
+          </div>
+
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </section>
+
+      {/* Featured Products */}
+      <section className="py-16">
+        <div className="container mx-auto px-6">
+          <h2 className="text-3xl font-bold  mb-8 text-[#A67B5B]">Featured Products</h2>
+          <div className="flex flex-wrap justify-center">
+            {featuredProducts.map((product) => productCard(product, true))}
+          </div>
+        </div>
+      </section>
+
+      {/* Latest Products */}
+      <section className="py-16 bg-gray-200">
+        <div className="container mx-auto px-6">
+          <h2 className="text-3xl font-bold text-gray-800 mb-8">Latest Products</h2>
+          <div className="flex flex-wrap justify-center">
+            {latestProducts.map((product) => productCard(product))}
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-800 text-gray-300 py-6">
+        <div className="container mx-auto px-6 flex justify-between items-center">
+          {/* Footer Links */}
+          <div>
+            <a href="#" className="block hover:text-white">Terms of Service</a>
+            <a href="#" className="block hover:text-white">Privacy Policy</a>
+            <a href="#" className="block hover:text-white">Refund Policy</a>
+          </div>
+
+          {/* Social Media Links */}
+          <div className="flex space-x-4">
+            <a href="#" className="hover:text-white">Facebook</a>
+            <a href="#" className="hover:text-white">Instagram</a>
+            <a href="#" className="hover:text-white">Twitter</a>
+          </div>
+        </div>
       </footer>
     </div>
   );
