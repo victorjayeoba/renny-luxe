@@ -8,7 +8,7 @@ export default function Header() {
 
   return (
     <header className="z-50 relative bg-gray-800">
-      <div className="container mx-auto px-6 py-4 flex justify-between items-center text-white">
+      <div className="xl:container mx-auto px-6 py-4 flex justify-between items-center text-white">
         {/* Logo */}
         <motion.h1
           className="text-3xl font-bold font-pacifico"

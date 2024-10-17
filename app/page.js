@@ -26,7 +26,7 @@ export default function Home() {
     <p className="mt-4 text-base md:text-lg lg:text-xl">
       Discover our range of skincare products for a glowing complexion.
     </p>
-    <form className="rounded-3xl bg-slate-200 max-w-full mx-auto lg:w-full lg:max-w-5xl overflow-hidden flex text-lg text-gray-950 my-6 shadow-2xl drop-shadow-2xl">
+    <form className="rounded-3xl bg-slate-200 max-w-full mx-auto md:w-full md:max-w-5xl md:min-w-96 overflow-hidden flex text-lg text-gray-950 my-6 shadow-2xl drop-shadow-2xl">
       <input
         className="h-12 block py-3 rounded-l-3xl flex-grow max-w-[80%] px-4 placeholder:text-lg placeholder:leading-9"
         type="search"
