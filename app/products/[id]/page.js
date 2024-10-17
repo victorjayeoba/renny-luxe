@@ -19,7 +19,7 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title: product.name,
       description: product.description,
-      url: `http://localhost:3000/products/${id}`,
+      url: `https://renny-luxe.vercel.app/${id}`,
       images: [
         {
           url: product.image.src,
