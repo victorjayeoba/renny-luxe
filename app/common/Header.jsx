@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { FaShoppingCart } from 'react-icons/fa';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false); // State to manage mobile menu
 
   return (
-    <header className="bg-white shadow-lg">
-      <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+    <header className="z-50 relative bg-gray-800">
+      <div className="container mx-auto px-6 py-4 flex justify-between items-center text-white">
         {/* Logo */}
         <motion.h1
-          className="text-3xl font-bold font-pacifico text-gray-800"
+          className="text-3xl font-bold font-pacifico"
           initial={{ y: -100 }}
           animate={{ y: 0 }}
           transition={{ duration: 0.5 }}
@@ -17,85 +18,58 @@ export default function Header() {
           Rennys Luxe
         </motion.h1>
 
-        {/* Hamburger Icon for Mobile */}
-        <button
-          className="md:hidden flex items-center justify-center p-2 text-gray-600"
-          onClick={() => setIsOpen(!isOpen)} // Toggle mobile menu
-        >
-          {isOpen ? "✖️" : "☰"}{" "}
-          {/* Show X when menu is open, hamburger icon otherwise */}
-        </button>
-
-        {/* Nav Links */}
-        <nav
-          className={`flex-col hidden md:flex gap-3 md:flex-row space-y-4 md:space-y-0  `}
-        >
-          <a href="#" className="text-gray-600 hover:text-gray-900">
-            Home
-          </a>
-          <a href="#" className="text-gray-600 hover:text-gray-900">
-            Shop
-          </a>
-          <a href="#" className="text-gray-600 hover:text-gray-900">
-            About
-          </a>
-          <a href="#" className="text-gray-600 hover:text-gray-900">
-            Contact
-          </a>
-        </nav>
-
-        {/* Search Form */}
-        <div className="relative hidden md:block">
-          {" "}
-          {/* Hide on mobile, show on md and above */}
-          <input
-            type="text"
-            placeholder="Search..."
-            className="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:text-red-200"
-          />
-          <button className="absolute right-2 top-2 text-gray-600">🔍</button>
-        </div>
-      </div>
-
-      {/* Mobile Search Form */}
-      <div
-        className={`relative px-3 py-3 md:hidden ${
-          isOpen ? "block" : "hidden"
-        }`}
-      >
-        <div className="relative">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="px-4 py-2 border block w-full rounded-lg  focus:outline-none focus:ring-2 outline outline-red-200 focus:text-black-200"
-          />
-          <button className="absolute -translate-y-1/2 -translate-x-1/2 right-2 top-[50%] text-gray-600">
-            🔍
+        <div className="flex gap-3 items-center">
+          <FaShoppingCart className="mr-1 md:hidden" />
+          {/* Hamburger Icon for Mobile */}
+          <button
+            className="md:hidden flex items-center justify-center p-2 transition-transform transform hover:scale-110"
+            onClick={() => setIsOpen(!isOpen)} // Toggle mobile menu
+          >
+            {isOpen ? "✖️" : "☰"} {/* Show X when menu is open, hamburger icon otherwise */}
           </button>
         </div>
 
+        {/* Nav Links */}
+        <nav
+          className={`flex-col hidden items-center md:flex gap-4 md:flex-row space-y-4 md:space-y-0 text-lg md:text-xl`}
+        >
+          {["Home", "About", "Blog", "Services", "Contact"].map((item, index) => (
+            <motion.a
+              key={index}
+              href="#"
+              className="text-slate-100 hover:text-white transition duration-300 transform hover:scale-105"
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: index * 0.1 }}
+            >
+              {item}
+            </motion.a>
+          ))}
+          <FaShoppingCart className="mr-1 cursor-pointer" />
+        </nav>
+      </div>
+
+      {/* Mobile Navigation */}
+      <div
+        className={`relative px-3 bg-white py-3 md:hidden transition-all duration-300 ${
+          isOpen ? "block" : "hidden"
+        }`}
+      >
         <nav className={`flex-col md:hidden space-y-4 py-3`}>
-          <ul>
-            <li>
-              <a href="#" className="text-gray-600 hover:text-gray-900">
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-gray-600 hover:text-gray-900">
-                Shop
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-gray-600 hover:text-gray-900">
-                About
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-gray-600 hover:text-gray-900">
-                Contact
-              </a>
-            </li>
+          <ul className="flex flex-col gap-4">
+            {["Home", "About", "Blog", "Services", "Contact"].map((item, index) => (
+              <li key={index}>
+                <motion.a
+                  href="#"
+                  className="text-gray-600 hover:text-gray-900 transition duration-300 transform hover:scale-105"
+                  initial={{ y: -10, opacity: 0 }}
+                  animate={isOpen ? { y: 0, opacity: 1 } : { y: -10, opacity: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  {item}
+                </motion.a>
+              </li>
+            ))}
           </ul>
         </nav>
       </div>

@@ -10,7 +10,7 @@
 }
 
 .calc-height {
-  min-height: calc(100svh - 30px); /* Replace 100px with your desired value */
+  min-height: calc(100svh - 100px); /* Replace 100px with your desired value */
 }
 
 .font-pacifico {
@@ -23,4 +23,20 @@
 
 .font-lobster {
   font-family: "Lobster", cursive;
+}
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(270deg, #ff007f, #ff7e00, #ff007f);
+  background-size: 400% 100%;
+  animation: shimmer 2s infinite linear;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
