@@ -26,7 +26,7 @@ export default function Home() {
           <p className="mt-4 text-lg">
             Discover our range of skincare products for a glowing complexion.
           </p>
-          <form className="rounded-3xl bg-slate-200 max-w-[95%] mx-auto  lg:w-full lg:max-w-4xl overflow-hidden flex text-2xl text-gray-950 my-6 shadow-2xl drop-shadow-2xl">
+          <form className="rounded-3xl bg-slate-200 max-w-[95%] mx-auto lg:w-full lg:max-w-4xl overflow-hidden flex text-2xl text-gray-950 my-6 shadow-2xl drop-shadow-2xl">
             <input
               className="h-12 block py-3 rounded-l-3xl flex-grow max-w-[80%] px-4 placeholder:text-lg placeholder:leading-9"
               type="search"
@@ -36,7 +36,7 @@ export default function Home() {
               Search
             </button>
           </form>
-          <div className="flex text-start justify-start  max-w-[95%] mx-auto md:max-w-xl gap-2 text-sm text-gray-400">
+          <div className="flex text-start justify-start max-w-[95%] mx-auto md:max-w-xl gap-2 text-sm text-gray-400">
             <Link
               href="#"
               className="border-[1px] rounded-full p-1 px-3 hover:text-gray-50 shadow-2xl"
@@ -58,21 +58,17 @@ export default function Home() {
           </div>
         </div>
         <Marquee speed={60} gradient={true} gradientColor={[255, 255, 255]} gradientWidth={100} pauseOnHover={true} className="text-sm">
-  🌟 FLASH SALE ALERT! 🌟 Get 40% OFF on all skincare products! 🧴✨ Hurry, while stocks last! 🛒 Shop now and glow up with our best-selling serums, creams, and more! 💖 Limited time only! ⏳ Don't miss out!
+  {`🌟 FLASH SALE ALERT! 🌟 Get 40% OFF on all skincare products! 🧴✨ Hurry, while stocks last! 🛒 Shop now and glow up with our best-selling serums, creams, and more! 💖 Limited time only! ⏳ Don&apos;t miss out!`}
 </Marquee>
 
-
-       </section>
-
+      </section>
 
       {/* Latest Products */}
       <section className="pt-8">
-
-
         <div className=" mx-auto px-3 xl:px-6">
           <div className="xl:container mx-auto py-8">
             <h2 className="text-3xl font-bold text-center mb-6 text-[#A67B5B]">
-        Latest Products
+              Latest Products
             </h2>
             <div className="grid grid-cols-2 gap-3 md:gap-6 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 justify-center">
               {products.map((product) => (
@@ -85,12 +81,11 @@ export default function Home() {
         </div>
       </section>
 
-
       {/* Our Products */}
       <section className="pt-8">
         <div className="bg-orange-400 mx-auto px-3 xl:px-6">
           <div className="xl:container mx-auto py-8">
-          <h2 className="text-3xl font-bold text-center mb-6 text-[#A67B5B]">
+            <h2 className="text-3xl font-bold text-center mb-6 text-[#A67B5B]">
               Our Products
             </h2>
             <div className="grid grid-cols-2 gap-3 md:gap-6 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 justify-center">
@@ -129,6 +124,9 @@ export default function Home() {
               Twitter
             </a>
           </div>
+        </div>
+        <div className="text-center text-gray-400 mt-4">
+          © {new Date().getFullYear()} MyShop. All rights reserved.
         </div>
       </footer>
     </div>
