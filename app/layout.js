@@ -1,4 +1,5 @@
 
+import Header from "./common/Header";
 import "./globals.css";
 
 import { Pacifico, Playfair_Display, Lobster } from '@next/font/google';
@@ -26,6 +27,8 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
       </head>
       <body className={`${playfairDisplay.className} `}>
+        
+      <Header/>
         {children}
       </body>
     </html>

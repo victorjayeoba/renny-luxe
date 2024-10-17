@@ -1,5 +1,6 @@
 {
     "recommendations": [
-        "wakatime.vscode-wakatime"
+        "wakatime.vscode-wakatime",
+        "dsznajder.es7-react-js-snippets"
     ]
 }

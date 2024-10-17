@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
-import { FaHeart, FaRegHeart, FaPlus, FaMinus, FaShoppingCart } from 'react-icons/fa';
+import { FaHeart, FaRegHeart, FaPlus, FaMinus, FaShoppingCart, FaShare } from 'react-icons/fa';
 import Link from 'next/link';
 
 const ProductCard = ({ product }) => {
@@ -30,30 +30,37 @@ const ProductCard = ({ product }) => {
         </div>
       </Link>
       <div className="p-4">
-        <h2 className="text-lg font-semibold text-blue-800">{product.name}</h2>
+        <h2 className="text-lg font-semibold text-blue-800 line-clamp-1">{product.name}</h2>
         <div className="flex justify-between items-center mt-2">
           <span className="text-xl font-bold text-green-600">{product.price}</span>
         </div>
-        <div className="flex items-center gap-3 justify-between mt-4">
+        <div className="flex gap-2 items-center justify-between mt-4">
           {isInCart ? (
-            <div className="flex w-full justify-between bg-gray-100 py-1 items-center">
-              <button onClick={handleDecrement} className="bg-gray-300 text-black py-1 px-2 rounded-l hover:bg-gray-400 transition">
-                <FaMinus />
+            <div className="flex w-full max-w-40 justify-between bg-gray-100 py-1 items-center">
+              <button onClick={handleDecrement} className=" text-black py-1 px-2 rounded-l bg-[#A67B5B]  hover:bg-gray-400 transition">
+                <FaMinus  color='#ffffff' />
               </button>
               <span className="mx-2">{quantity}</span>
-              <button onClick={handleIncrement} className="bg-gray-300 text-black py-1 px-2 rounded-r hover:bg-gray-400 transition">
-                <FaPlus />
+              <button onClick={handleIncrement} className=" text-black py-1 px-2 rounded-r bg-[#A67B5B]  hover:bg-gray-400 transition">
+                <FaPlus color='#ffffff' />
               </button>
             </div>
           ) : (
-            <button onClick={handleAddToCart} className="bg-[#A67B5B] w-full text-white py-1 px-4 rounded hover:bg-[#d38244] transition flex items-center">
-              <FaShoppingCart className="mr-1" />
+            <button onClick={handleAddToCart} className="bg-[#A67B5B]  item-center gap-0 w-full max-w-40 text-white py-1 px-4 rounded hover:bg-[#d38244] transition flex items-center">
+              <FaShoppingCart className="mr-1 hidden" />
               Add to Cart
             </button>
           )}
+          <div className='md:flex gap-3'>
           <button onClick={() => handleWish(!isInWish)} className="text-red-600 hover:text-red-800 transition">
-            {isInWish ? <FaHeart size={24} /> : <FaRegHeart size={24} />}
+            {isInWish ? <FaHeart className='text-base md:text-xl'  /> : <FaRegHeart className='text-base md:text-xl' />}
           </button>
+     <Link href={""}>
+     <FaShare color='#A67B5B' className='text-base md:text-xl' />
+     </Link>
+          </div>
+         
+         
         </div>
       </div>
     </div>
