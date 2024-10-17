@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import products from "@/app/data/product"; // Adjust this path as necessary
-
+import Image from "next/image";
 const ProductDetails = ({ id }) => {
     const product = products.find((p) => p.id === parseInt(id)); 
   const [quantity, setQuantity] = useState(1);
@@ -23,8 +23,10 @@ const ProductDetails = ({ id }) => {
     <div className="container mx-auto px-4 py-10">
       <div className="flex flex-col md:flex-row md:space-x-8">
         <div className="flex-1">
-          <img
+          <Image
             src={product.image.src}
+            width={200}
+            height={200}
             alt={product.name}
             className="w-full h-auto rounded-lg shadow-lg"
           />

@@ -1,33 +1,15 @@
 "use client";
 import products from "@/app/data/product";
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
 import heroImage from "@/app/assets/images/banner_2.jpg";
 import Header from "./common/Header";
 import Link from "next/link";
 import ProductCard from "./component/ProductCard";
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 1 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
-
 export default function Home() {
-
   return (
     <div className="bg-gray-100">
       {/* Intro Section */}
-      <motion.section
+      <section
         className="relative text-white max-h-svh w-svh flex flex-col justify-between bg-cover bg-center"
         style={{
           backgroundImage: `linear-gradient(rgba(255, 5, 5, 0.5), rgba(0, 0, 0, 0.94)), url(${heroImage.src})`,
@@ -37,14 +19,9 @@ export default function Home() {
         <div className="relative py-6 pb-10 flex items-center justify-center flex-col text-center h-full font-playfair mx-auto px-3 xl:w-[70%]">
           <h1 className="text-4xl md:text-7xl font-bold shadow-red-700">
             Radiate Your <br />
-            <motion.span
-              className="text-5xl md:text-8xl font-black shimmer"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1 }}
-            >
+            <span className="text-5xl md:text-8xl font-black shimmer">
               Natural Beauty
-            </motion.span>
+            </span>
           </h1>
           <p className="mt-4 text-lg">
             Discover our range of skincare products for a glowing complexion.
@@ -71,78 +48,49 @@ export default function Home() {
             </Link>
           </div>
         </div>
-      </motion.section>
+      </section>
 
       {/* Latest Products */}
-      <motion.section
-        className="py-16"
-        variants={staggerContainer}
-        initial="hidden"
-        animate="visible"
-      >
+      <section className="py-16">
         <div className="container mx-auto px-6">
           <div className="container mx-auto px-4 py-8">
             <h2 className="text-3xl font-bold text-center mb-6 text-[#A67B5B]">
               Latest Products
             </h2>
             <div className="flex flex-wrap gap-6 justify-center">
-              {products.map((product) => {
-                const ref = useRef(null);
-                const inView = useInView(ref, { once: true });
-
-                return (
-                  <motion.div
-                    ref={ref}
-                    key={product.id}
-                    className="flex-shrink-0 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5"
-                    variants={fadeInUp}
-                    initial="hidden"
-                    animate={inView ? "visible" : "hidden"}
-                  >
-                    <ProductCard product={product} />
-                  </motion.div>
-                );
-              })}
+              {products.map((product) => (
+                <div
+                  key={product.id}
+                  className="flex-shrink-0 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5"
+                >
+                  <ProductCard product={product} />
+                </div>
+              ))}
             </div>
           </div>
         </div>
-      </motion.section>
+      </section>
 
       {/* Our Products */}
-      <motion.section
-        className="pt-8 "
-        variants={staggerContainer}
-        initial="hidden"
-        animate="visible"
-      >
+      <section className="pt-8">
         <div className="bg-orange-400 mx-auto px-6">
           <div className="container mx-auto px-4 py-8">
             <h2 className="text-3xl font-bold text-center mb-6 text-[#A67B5B]">
-              Ours Products
+              Our Products
             </h2>
             <div className="flex flex-wrap gap-6 justify-center">
-              {products.map((product) => {
-                const ref = useRef(null);
-                const inView = useInView(ref, { once: true });
-
-                return (
-                  <motion.div
-                    ref={ref}
-                    key={product.id}
-                    className="flex-shrink-0 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5"
-                    variants={fadeInUp}
-                    initial="hidden"
-                    animate={inView ? "visible" : "hidden"}
-                  >
-                    <ProductCard product={product} />
-                  </motion.div>
-                );
-              })}
+              {products.map((product) => (
+                <div
+                  key={product.id}
+                  className="flex-shrink-0 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5"
+                >
+                  <ProductCard product={product} />
+                </div>
+              ))}
             </div>
           </div>
         </div>
-      </motion.section>
-
+      </section>
 
       {/* Footer */}
       <footer className="bg-gray-800 text-gray-300 py-6">
