@@ -1,7 +1,6 @@
 "use client";
 import products from "@/app/data/product";
 import heroImage from "@/app/assets/images/banner_2.jpg";
-import Header from "./common/Header";
 import Link from "next/link";
 import ProductCard from "./component/ProductCard";
 import Marquee from "react-fast-marquee";

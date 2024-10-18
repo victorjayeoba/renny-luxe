@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { FaShoppingCart } from 'react-icons/fa';
+import Link from "next/link";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false); // State to manage mobile menu
@@ -10,6 +11,7 @@ export default function Header() {
     <header className="z-50 relative bg-gray-800">
       <div className="xl:container mx-auto px-6 py-4 flex justify-between items-center text-white">
         {/* Logo */}
+        <Link href={"/"}>
         <motion.h1
           className="text-3xl font-bold font-pacifico"
           initial={{ y: -100 }}
@@ -18,9 +20,11 @@ export default function Header() {
         >
           Rennys Luxe
         </motion.h1>
+        </Link>
+     
 
         <div className="flex gap-3 items-center">
-          <FaShoppingCart className="mr-1 md:hidden" />
+        <Link href={"/cart-checkout"}> <FaShoppingCart className="mr-1 cursor-pointer md:hidden" /></Link>
           {/* Hamburger Icon for Mobile */}
           <button
             className="md:hidden flex items-center justify-center p-2 transition-transform transform hover:scale-110"
@@ -46,7 +50,8 @@ export default function Header() {
               {item}
             </motion.a>
           ))}
-          <FaShoppingCart className="mr-1 cursor-pointer" />
+          <Link href={"/cart-checkout"}> <FaShoppingCart className="mr-1 cursor-pointer" /></Link>
+      
         </nav>
       </div>
 

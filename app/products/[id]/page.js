@@ -1,3 +1,4 @@
+import Breadcrumb from "@/app/component/Breadcrubs";
 import ProductDetails from "@/app/component/ProductDeatils";
 import products from "@/app/data/product"; // Adjust this path as necessary
 
@@ -50,15 +51,22 @@ const ProductDetailsPage = ({ params }) => {
   console.log('Available Products:', products);
 
   const product = products.find((p) => p.id === parseInt(id)); // Use parseInt if IDs are numeric
-
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Product Description", href: id},
+  ];
+  
   if (!product) {
     return <div>Product not found</div>; // Handle the case when the product is not found
   }
 
   return (
-    <div className="container mx-auto px-6 py-10">
+    <>
+    <Breadcrumb items={breadcrumbItems} />
+    <div className="container mx-auto px-6 py-4">
  <ProductDetails id={id} />
     </div>
+    </>
   );
 };
 
