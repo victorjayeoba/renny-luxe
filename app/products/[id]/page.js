@@ -19,7 +19,7 @@ description: product.description,
 openGraph: {
 title: product.name,
 description: product.description,
-      url: `http://localhost:3000/products/${id}`,
+   
       url: `https://renny-luxe.vercel.app/${id}`,
 images: [
 {
