@@ -14,19 +14,19 @@ description: 'The product you are looking for does not exist.',
 }
 
 return {
-title: product.name,
-description: product.description,
+title: "product.name",
+description: "product.description",
 openGraph: {
-title: product.name,
-description: product.description,
+title: "product.name",
+description:" product.description",
    
-      url: `https://renny-luxe.vercel.app/${id}`,
+      url: `https://renny-luxe.vercel.app/1`,
 images: [
 {
 url: product.image.src,
 width: 800,
 height: 600,
-alt: product.name,
+alt: "product.name",
 },
 ],
 },
