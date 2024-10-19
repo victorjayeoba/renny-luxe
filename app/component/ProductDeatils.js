@@ -13,8 +13,8 @@ import {
 } from "react-icons/fa";
 import Link from "next/link";
 
-const ProductDetails = ({ id }) => {
-  const product = products.find((p) => p.id === parseInt(id));
+const ProductDetails = ({ product }) => {
+
   const [quantity, setQuantity] = useState(1);
   const [isInCart, setIsInCart] = useState(false);
   const [isInWish, setIsInWish] = useState(false);
