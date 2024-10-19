@@ -4,7 +4,7 @@
 import { useState } from "react";
 import { FaHeart, FaMinus, FaPlus, FaRegHeart, FaShare, FaShoppingCart } from "react-icons/fa";
 
-const ProductDetailsClient = ({ product }) => {
+const ProductDetailsClient = ({ name }) => {
   const [quantity, setQuantity] = useState(1);
   const [isInCart, setIsInCart] = useState(false);
   const [isInWish, setIsInWish] = useState(false);
@@ -13,15 +13,15 @@ const ProductDetailsClient = ({ product }) => {
   const handleDecrement = () => quantity > 1 && setQuantity((prev) => prev - 1);
   const handleAddToCart = () => {
     setIsInCart(true);
-    alert(`Added ${quantity} ${product.name}(s) to cart!`);
+    alert(`Added ${quantity} ${name}(s) to cart!`);
   };
   const handleWish = (e) => setIsInWish(e);
 
   // Share product URL using Web Share API
   const handleShare = async () => {
     const shareData = {
-      title: product.name,
-      text: `Check out this product: ${product.name}`,
+      title: name,
+      text: `Check out this product: ${name}`,
       url: window.location.href, // Use the current page URL
     };
 

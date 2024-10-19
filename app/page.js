@@ -1,11 +1,23 @@
-"use client";
-import products from "@/app/data/product";
+"use client"
+import { useEffect, useState } from "react";
+import { getProducts } from "@/services/firebase"; // Adjust the path as necessary
 import heroImage from "@/app/assets/images/banner_2.jpg";
 import Link from "next/link";
 import ProductCard from "./component/ProductCard";
 import Marquee from "react-fast-marquee";
 
 export default function Home() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const productsData = await getProducts();
+      setProducts(productsData);
+    };
+
+    fetchProducts();
+  }, []); // Empt
+
   return (
     <div className="bg-gray-100">
       {/* Intro Section */}
@@ -93,6 +105,18 @@ export default function Home() {
                   <ProductCard product={product} />
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="pt-8">
+        <div className="bg-yellow-300 mx-auto px-3 xl:px-6">
+          <div className="xl:container mx-auto py-8">
+            <h2 className="text-3xl font-bold text-center mb-6 text-[#A67B5B]">
+              Our Products
+            </h2>
+            <div className="grid grid-cols-2 gap-3 md:gap-6 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 justify-center">
+      
             </div>
           </div>
         </div>

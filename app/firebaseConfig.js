@@ -16,3 +16,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const firestore = getFirestore(app); // If using Firestore
 export const database = getDatabase(app); // If using Realtime Database
+// Export Firestore database
+export const db = getFirestore(app); // Renaming to `db` for clarity
+
+

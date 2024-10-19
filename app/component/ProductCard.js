@@ -1,3 +1,4 @@
+"use client"
 import { useState } from "react";
 import Image from "next/image";
 import {
@@ -25,9 +26,9 @@ const ProductCard = ({ product }) => {
 
   const handleShare = async () => {
     const shareData = {
-      title: product.name,
-      text: `Check out this product: ${product.name}`,
-      url: `/products/${product.id}`, // Use the current page URL
+      title: product?.name,
+      text: `Check out this product: ${product?.name}`,
+      url: `/products/${product?.id}`, // Use the current page URL
     };
 
     try {
@@ -44,11 +45,11 @@ const ProductCard = ({ product }) => {
 
   return (
     <div className="bg-gray-100 rounded-lg shadow-lg overflow-hidden">
-      <Link href={`/products/${product.id}`}>
+      <Link href={`/products/${product?.id}`}>
         <div className="relative group cursor-pointer">
           <Image
-            src={product.image.src}
-            alt={product.name}
+            src={product?.main_image}
+            alt={product?.name}
             width={300}
             height={300}
             className="w-full h-48 object-cover"
@@ -61,7 +62,7 @@ const ProductCard = ({ product }) => {
         </h2>
         <div className="flex justify-between items-center mt-2">
           <span className="text-xl font-bold text-green-600">
-            {product.price}
+            {product?.price}
           </span>
         </div>
         <div className="flex gap-2 items-center justify-between mt-4">
