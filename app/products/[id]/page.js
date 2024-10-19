@@ -1,6 +1,7 @@
+import Breadcrumb from "@/app/component/Breadcrubs";
+import ProductDetails from "@/app/component/ProductDeatils";
 import products from "@/app/data/product";
-import Breadcrumbs from "@/app/component/Breadcrumbs";
-import ProductDetails from "@/app/component/ProductDetails";
+
 import Head from "next/head";
 
 export async function generateMetadata({ params }) {
@@ -62,7 +63,7 @@ const ProductDetailsPage = ({ params }) => {
 
   return (
     <>
-      <Breadcrumbs items={breadcrumbItems} />
+      <Breadcrumb items={breadcrumbItems} />
       <div className="container mx-auto px-6 py-4">
         <ProductDetails id={id} />
       </div>
