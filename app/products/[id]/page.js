@@ -38,7 +38,15 @@ const ProductDetailsPage = ({ params }) => {
   const { id } = params;
   const product = products.find((p) => p.id === parseInt(id));
 
-  return <ProductDetails  />;
+  return (
+
+    <> 
+    <div>I am good</div>
+       <ProductDetails product={product} />;
+       </>
+  )
+  
+ 
 };
 
 export default ProductDetailsPage;
