@@ -65,18 +65,31 @@ const ProductDetailsPage = ({ params }) => {
 
   return (
     <>
-    <Head>
-      <title>{product.name}</title>
-      <meta name="description" content={product.description} />
-      <meta property="og:title" content={product.name} />
-      <meta property="og:description" content={product.description} />
-      <meta property="og:url" content={`https://renny-luxe.vercel.app/products/${id}`} />
-      <meta property="og:image" content={product.image.src} />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={product.name} />
-      <meta name="twitter:description" content={product.description} />
-      <meta name="twitter:image" content={product.image.src} />
-    </Head>
+      <head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Discover the best skincare products tailored for your unique needs. Nourish and rejuvenate your skin with our organic, dermatologist-approved solutions." />
+        <meta name="keywords" content="skincare, organic skincare, dermatologist-approved, beauty, skincare products, skin treatments" />
+        <meta name="author" content="Jayeoba Victor" />
+        
+        {/* Open Graph Metadata for Social Sharing */}
+        <meta property="og:title" content="Discover Your Perfect Skincare Routine" />
+        <meta property="og:description" content="Explore our range of organic, dermatologist-approved skincare products that nourish and rejuvenate your skin." />
+        <meta property="og:image" content="https://cdn.pixabay.com/photo/2024/06/28/08/23/ajrak-8858928_640.png" />
+        <meta property="og:url"  content="https://renny-luxe.vercel.app/" />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter Card Metadata */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Discover Your Perfect Skincare Routine" />
+        <meta name="twitter:description" content="Explore our range of organic, dermatologist-approved skincare products that nourish and rejuvenate your skin." />
+        <meta name="twitter:image" content={product_1}/>
+
+        <title>Discover Your Perfect Skincare Routine</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+      </head>
     <Breadcrumb items={breadcrumbItems} />
     <div className="container mx-auto px-6 py-4">
       <ProductDetails id={id} />
