@@ -1,5 +1,5 @@
 import products from "@/app/data/product";
-import ProductDetails from "@/app/component/ProductDeatils";
+
 
 // Generate Metadata Function
 export async function generateMetadata({ params }) {
@@ -57,7 +57,7 @@ const ProductDetailsPage = ({ params }) => {
     <>
       
       <div className="container mx-auto px-6 py-4">
-        <ProductDetails product={product}/>
+       <di>lnjbvk</di>
       </div>
     </>
   );
