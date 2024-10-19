@@ -4,7 +4,7 @@ import ProductDetails from "@/app/component/ProductDeatils";
 import Head from "next/head";
 
 
-export async function generateMetadata({ params }) {
+/* export async function generateMetadata({ params }) {
   const { id } = params;
   const product = products.find((p) => p.id === parseInt(id));
 
@@ -38,7 +38,7 @@ export async function generateMetadata({ params }) {
       image: product.image.src, // Ensure you're using .src for image URL
     },
   };
-}
+} */
 
 const ProductDetailsPage = ({ params }) => {
   if (!params || !params.id) {
