@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import products from "@/app/data/product"; // Adjust this path as necessary
 import Image from "next/image";
