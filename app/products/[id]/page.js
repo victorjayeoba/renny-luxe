@@ -1,5 +1,5 @@
 import products from "@/app/data/product";
-
+import Breadcrumb from "@/app/component/Breadcrubs";
 
 // Generate Metadata Function
 export async function generateMetadata({ params }) {
@@ -48,14 +48,14 @@ const ProductDetailsPage = ({ params }) => {
     return <div>Product not found</div>;
   }
 
-/*   const breadcrumbItems = [
+ const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: "Product Description", href: `/products/${id}` },
-  ]; */
+  ]; 
 
   return (
     <>
-      
+      <Breadcrumb items={breadcrumbItems }/>
       <div className="container mx-auto px-6 py-4">
        <di>lnjbvk</di>
       </div>
