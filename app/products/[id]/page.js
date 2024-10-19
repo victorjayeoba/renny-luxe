@@ -14,7 +14,7 @@ export async function generateMetadata({ params }) {
       description: "The product you are looking for does not exist.",
     };
   }
-
+  console.log("Product:", product);
   return {
     title: product.name,
     description: product.description,
@@ -50,6 +50,7 @@ const ProductDetailsPage = ({ params }) => {
   // Logging for debugging purposes
   console.log("Received ID:", id);
   console.log("Available Products:", products);
+
 
   const product = products.find((p) => p.id === parseInt(id)); // Ensure proper ID matching
 
