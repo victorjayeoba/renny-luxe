@@ -1,5 +1,6 @@
 import Header from "./common/Header";
 import "./globals.css";
+import product_1 from "@/app/assets/images/product_1.jpg";
 
 import { Pacifico, Playfair_Display, Lobster } from '@next/font/google';
 
@@ -26,20 +27,20 @@ export default function RootLayout({ children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="Discover the best skincare products tailored for your unique needs. Nourish and rejuvenate your skin with our organic, dermatologist-approved solutions." />
         <meta name="keywords" content="skincare, organic skincare, dermatologist-approved, beauty, skincare products, skin treatments" />
-        <meta name="author" content="Your Name" />
+        <meta name="author" content="Jayeoba Victor" />
         
         {/* Open Graph Metadata for Social Sharing */}
         <meta property="og:title" content="Discover Your Perfect Skincare Routine" />
         <meta property="og:description" content="Explore our range of organic, dermatologist-approved skincare products that nourish and rejuvenate your skin." />
-        <meta property="og:image" content="https://example.com/path-to-your-image.jpg" />
-        <meta property="og:url" content="https://renny-luxe.vercel.app/" />
+        <meta property="og:image" content="https://cdn.pixabay.com/photo/2024/06/28/08/23/ajrak-8858928_640.png" />
+        <meta property="og:url" ccontent={product_1} />
         <meta property="og:type" content="website" />
 
         {/* Twitter Card Metadata */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Discover Your Perfect Skincare Routine" />
         <meta name="twitter:description" content="Explore our range of organic, dermatologist-approved skincare products that nourish and rejuvenate your skin." />
-        <meta name="twitter:image" content="https://example.com/path-to-your-image.jpg" />
+        <meta name="twitter:image" content={product_1}/>
 
         <title>Discover Your Perfect Skincare Routine</title>
 
