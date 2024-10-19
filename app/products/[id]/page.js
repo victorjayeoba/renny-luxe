@@ -1,6 +1,8 @@
+import products from "@/app/data/product";
 import Breadcrumb from "@/app/component/Breadcrubs";
 import ProductDetails from "@/app/component/ProductDeatils";
-import products from "@/app/data/product";
+import Head from "next/head";
+
 
 export async function generateMetadata({ params }) {
   const { id } = params;
@@ -62,11 +64,23 @@ const ProductDetailsPage = ({ params }) => {
 
   return (
     <>
-      <Breadcrumb items={breadcrumbItems} />
-      <div className="container mx-auto px-6 py-4">
-        <ProductDetails id={id} /> {/* Pass the product ID to the details component */}
-      </div>
-    </>
+    <Head>
+      <title>{product.name}</title>
+      <meta name="description" content={product.description} />
+      <meta property="og:title" content={product.name} />
+      <meta property="og:description" content={product.description} />
+      <meta property="og:url" content={`https://renny-luxe.vercel.app/products/${id}`} />
+      <meta property="og:image" content={product.image.src} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={product.name} />
+      <meta name="twitter:description" content={product.description} />
+      <meta name="twitter:image" content={product.image.src} />
+    </Head>
+    <Breadcrumb items={breadcrumbItems} />
+    <div className="container mx-auto px-6 py-4">
+      <ProductDetails id={id} />
+    </div>
+  </>
   );
 };
 
