@@ -83,7 +83,7 @@ const ProductDetailsPage = ({ params }) => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Discover Your Perfect Skincare Routine" />
         <meta name="twitter:description" content="Explore our range of organic, dermatologist-approved skincare products that nourish and rejuvenate your skin." />
-        <meta name="twitter:image" content={product_1}/>
+        <meta name="twitter:image" content={"https://cdn.pixabay.com/photo/2024/06/28/08/23/ajrak-8858928_640.png"}/>
 
         <title>Discover Your Perfect Skincare Routine</title>
 
