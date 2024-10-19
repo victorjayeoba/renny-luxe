@@ -1,6 +1,7 @@
 // Import necessary components and data
+import ProductDetails from "../../component/ProductDeatils";
 import products from "@/app/data/product";
-import ProductDetails from "@/app/component/ProductDetails";
+
 
 // Generate Metadata function
 export async function generateMetadata({ params }) {
