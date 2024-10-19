@@ -1,8 +1,8 @@
+// Import necessary components and data
 import products from "@/app/data/product";
-import Breadcrumb from "@/app/component/Breadcrubs";
-import ProductDetails from "@/app/component/ProductDeatils";
+import ProductDetails from "@/app/component/ProductDetails";
 
-// Generate Metadata Function
+// Generate Metadata function
 export async function generateMetadata({ params }) {
   const { id } = params;
   const product = products.find((p) => p.id === parseInt(id));
@@ -20,48 +20,24 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title: product.name,
       description: product.description,
-      url: `https://your-website-url.com/products/${id}`,
-      images: [
-        {
-          url: product.image.src,  // Ensure product.image.src is defined
-          width: 800,
-          height: 600,
-          alt: product.name,
-        },
-      ],
+      url: `https://your-site.com/products/${id}`,
+      images: [{ url: product.image.src }],
     },
     twitter: {
       card: "summary_large_image",
       title: product.name,
       description: product.description,
-      image: product.image.src,  // Make sure this path exists
+      image: product.image.src,
     },
   };
 }
 
-// Product Details Page
+// Product Details Page Component
 const ProductDetailsPage = ({ params }) => {
   const { id } = params;
-
   const product = products.find((p) => p.id === parseInt(id));
 
-  if (!product) {
-    return <div>Product not found</div>;
-  }
-
- const breadcrumbItems = [
-    { label: "Home", href: "/" },
-    { label: "Product Description", href: `/products/${id}` },
-  ]; 
-
-  return (
-    <>
-      <Breadcrumb items={breadcrumbItems }/>
-      <div className="container mx-auto px-6 py-4">
-      <ProductDetails product={product}/>
-      </div>
-    </>
-  );
+  return <ProductDetails product={product} />;
 };
 
 export default ProductDetailsPage;
