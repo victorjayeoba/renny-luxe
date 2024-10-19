@@ -58,7 +58,9 @@ return <div>Product not found</div>; // Handle the case when the product is not 
 
 return (
 <div className="container mx-auto px-6 py-10">
-<ProductDetails id={id} />
+<div>
+  shhxhhx9s
+</div>
 </div>
 );
 };
