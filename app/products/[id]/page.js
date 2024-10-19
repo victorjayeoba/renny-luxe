@@ -1,9 +1,11 @@
-// Import necessary components and data
-import ProductDetails from "../../component/ProductDeatils";
+// app/products/[id]/page.js
+
+
+import ProductDetailsClient from "@/app/component/ProductDetailsClient";
+import ProductDetailsStatic from "@/app/component/ProductDetailsStatic";
 import products from "@/app/data/product";
 
 
-// Generate Metadata function
 export async function generateMetadata({ params }) {
   const { id } = params;
   const product = products.find((p) => p.id === parseInt(id));
@@ -33,20 +35,20 @@ export async function generateMetadata({ params }) {
   };
 }
 
-// Product Details Page Component
 const ProductDetailsPage = ({ params }) => {
   const { id } = params;
   const product = products.find((p) => p.id === parseInt(id));
 
-  return (
+  if (!product) {
+    return <div>Product not found</div>;
+  }
 
-    <> 
-    <div>I am good</div>
-       <ProductDetails product={product} />;
-       </>
-  )
-  
- 
+  return (
+    <>
+      <ProductDetailsStatic product={product} />
+      <ProductDetailsClient product={product} />
+    </>
+  );
 };
 
 export default ProductDetailsPage;
