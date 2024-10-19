@@ -1,5 +1,6 @@
 import products from "@/app/data/product";
 import Breadcrumb from "@/app/component/Breadcrubs";
+import ProductDetails from "@/app/component/ProductDeatils";
 
 // Generate Metadata Function
 export async function generateMetadata({ params }) {
@@ -57,7 +58,7 @@ const ProductDetailsPage = ({ params }) => {
     <>
       <Breadcrumb items={breadcrumbItems }/>
       <div className="container mx-auto px-6 py-4">
-       <di>lnjbvk</di>
+      <ProductDetails product={product}/>
       </div>
     </>
   );
