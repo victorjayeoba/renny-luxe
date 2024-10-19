@@ -46,7 +46,7 @@ const ProductDetailsPage = ({ params }) => {
   return (
     <>
       <ProductDetailsStatic product={product} />
-      <ProductDetailsClient product={product} />
+
     </>
   );
 };

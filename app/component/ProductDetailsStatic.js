@@ -3,11 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import products from "@/app/data/product";
+import ProductDetailsClient from "./ProductDetailsClient";
 const ProductDetailsStatic = ({ product }) => {
   // Find related products by category or any custom logic
-  const relatedProducts = products.filter(
+/*   const relatedProducts = products.filter(
     (p) => p.category ===  p.id !== product.id
-  );
+  ); */
 
   return (
     <div>
@@ -26,12 +27,13 @@ const ProductDetailsStatic = ({ product }) => {
             <h1 className="text-3xl font-bold mb-2">{product.name}</h1>
             <p className="text-xl text-green-600 mb-2">${product.price}</p>
             <p className="mb-2">{product.description}</p>
+            <ProductDetailsClient product={product} />
           </div>
         </div>
       </div>
 
       {/* Related Products Section */}
-      <div className="mt-12">
+    {/*   <div className="mt-12">
         <h2 className="text-2xl font-semibold mb-6">Other Related Products</h2>
         <div className="grid grid-cols-2 gap-6 md:grid-cols-4 lg:grid-cols-5">
           {relatedProducts.map((relatedProduct) => (
@@ -61,7 +63,7 @@ const ProductDetailsStatic = ({ product }) => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
