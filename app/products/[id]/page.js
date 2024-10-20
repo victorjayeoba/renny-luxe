@@ -54,14 +54,10 @@ const ProductDetailsPage = async ({ params }) => {
         <div>
           <h2>Related Products</h2>
           <ul>
-            {relatedProducts.map((relatedProduct) => (
-              <li key={relatedProduct.id}>
-                <h3>{relatedProduct.name}</h3>
-                <img src={relatedProduct.main_image} alt={relatedProduct.name} />
-                <p>${relatedProduct.price}</p>
-              </li>
-            ))}
-          </ul>
+        {product.relatedProducts && product.relatedProducts.map((relatedRef) => (
+          <li key={relatedRef.id}>{relatedRef.name} - ${relatedRef.price}</li>
+        ))}
+      </ul>
         </div>
       )}
     </>

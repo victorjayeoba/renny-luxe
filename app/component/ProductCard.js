@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useState } from "react";
 import Image from "next/image";
 import {
@@ -15,7 +15,8 @@ const ProductCard = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
   const [isInCart, setIsInCart] = useState(false);
   const [isInWish, setIsInWish] = useState(false);
-
+  const [loading, setLoading] = useState(true); // Loading state for image
+  const [linkLoading, setLinkLoading] = useState(false); // Loading state for link clicks
   const handleIncrement = () => setQuantity((prev) => prev + 1);
   const handleDecrement = () => quantity > 1 && setQuantity((prev) => prev - 1);
   const handleAddToCart = () => {
@@ -43,41 +44,58 @@ const ProductCard = ({ product }) => {
     }
   };
 
+   // Overlay component
+   const LoadingOverlay = () => (
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+      <div className="w-16 h-16 border-4 border-t-transparent border-[#A67B5B] rounded-full animate-spin"></div>
+    </div>
+  );
+
   return (
-    <div className="bg-gray-100 rounded-lg shadow-lg overflow-hidden">
-      <Link href={`/products/${product?.id}`}>
-        <div className="relative group cursor-pointer">
+    <div className="bg-gray-100 rounded-lg shadow-lg overflow-hidden flex flex-col h-full">
+      <Link href={`/products/${product?.id}`} onClick={LoadingOverlay}>
+        <div className="relative group cursor-pointer flex-grow p-3 bg-white">
+          {loading && (
+            <div className="absolute inset-0 flex items-center justify-center bg-gray-200">
+              <div className="w-8 h-8 border-4 border-t-transparent border-[#A67B5B] rounded-full animate-spin"></div>
+            </div>
+          )}
           <Image
             src={product?.main_image}
             alt={product?.name}
             width={300}
             height={300}
-            className="w-full h-48 object-cover"
+            className={`w-full h-48 object-cover transition-opacity duration-300 ${loading ? 'opacity-0' : 'opacity-100'}`}
+            onLoadingComplete={() => setLoading(false)}
           />
         </div>
       </Link>
-      <div className="p-4">
-        <h2 className="text-lg font-semibold text-blue-800 line-clamp-1">
+      <div className="p-4 text-stone-700 flex flex-col justify-between flex-grow"> {/* Added flex-grow */}
+        <h2 className="text-lg font-light line-clamp-2">
           {product.name}
         </h2>
-        <div className="flex justify-between items-center mt-2">
-          <span className="text-xl font-bold text-green-600">
-            {product?.price}
+      
+
+      <div>
+      <div className="flex items-center mt-2">
+        <span>₦</span>
+          <span className="text-xl font-light">
+          {product?.price}
           </span>
         </div>
-        <div className="flex gap-2 items-center justify-between mt-4">
+        <div className="flex gap-2  items-center justify-between mt-2">         
           {isInCart ? (
             <div className="flex w-full max-w-40 justify-between bg-gray-100 py-1 items-center">
               <button
                 onClick={handleDecrement}
-                className=" text-black py-1 px-2 rounded-l bg-[#A67B5B]  hover:bg-gray-400 transition"
+                className="text-black py-1 px-2 rounded-l bg-[#A67B5B] hover:bg-gray-400 transition"
               >
                 <FaMinus color="#ffffff" />
               </button>
               <span className="mx-2">{quantity}</span>
               <button
                 onClick={handleIncrement}
-                className=" text-black py-1 px-2 rounded-r bg-[#A67B5B]  hover:bg-gray-400 transition"
+                className="text-black py-1 px-2 rounded-r bg-[#A67B5B] hover:bg-gray-400 transition"
               >
                 <FaPlus color="#ffffff" />
               </button>
@@ -111,6 +129,8 @@ const ProductCard = ({ product }) => {
             </button>
           </div>
         </div>
+      </div>
+       
       </div>
     </div>
   );

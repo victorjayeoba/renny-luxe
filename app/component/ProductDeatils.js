@@ -14,10 +14,10 @@ import {
 import Link from "next/link";
 
 const ProductDetails = ({ product }) => {
-
   const [quantity, setQuantity] = useState(1);
   const [isInCart, setIsInCart] = useState(false);
   const [isInWish, setIsInWish] = useState(false);
+  const [linkLoading, setLinkLoading] = useState(false); // Loading state for link clicks
 
   // Find related products by category or any custom logic
   const relatedProducts = products.filter(
@@ -56,8 +56,17 @@ const ProductDetails = ({ product }) => {
     }
   };
 
+  // Overlay component
+  const LoadingOverlay = () => (
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+      <div className="w-16 h-16 border-4 border-t-transparent border-blue-500 rounded-full animate-spin"></div>
+    </div>
+  );
+
   return (
     <div className="container mx-auto px-4 py-10">
+      {linkLoading && <LoadingOverlay />}
+      
       {/* Main Product Section */}
       <div className="flex flex-col md:flex-row md:space-x-8">
         <div className="flex-1 flex items-center justify-center">
@@ -151,6 +160,7 @@ const ProductDetails = ({ product }) => {
               </p>
               <Link
                 href={`/products/${relatedProduct.id}`}
+                onClick={() => setLinkLoading(true)} // Set loading state to true on click
                 className="text-[#A67B5B] hover:underline text-sm"
               >
                 View Details
