@@ -1,15 +1,22 @@
-// app/products/page.js or your appropriate path
-import React from 'react';
+// app/products/page.js
+
+import React, { Suspense } from 'react';
 import SearchComponent from '../component/SearchComponent';
 
+// Optionally generate metadata dynamically
 export async function generateMetadata({ searchParams }) {
-  const { s } = searchParams; // Extract search param
+  const { s } = searchParams; // Extract the search parameter
   return {
-    title: `Search results for ${s}`, // Example of dynamic title based on search term
-    description: `Find products related to ${s}`,
+    title: `Search results for ${s}`, // Use search param for title
+    description: `Find products related to ${s}`, // Dynamic description
   };
 }
 
+// Ensure to wrap in Suspense
 export default function Page() {
-  return <SearchComponent />;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SearchComponent />
+    </Suspense>
+  );
 }
