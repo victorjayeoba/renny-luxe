@@ -1,4 +1,4 @@
-// app/search/page.js (or the appropriate file path)
+"use client"
 import React, { Suspense } from 'react';
 import SearchComponent from '../component/SearchComponent';
 import { useSearchParams } from 'next/navigation';
@@ -13,11 +13,11 @@ export async function generateMetadata({ searchParams }) {
 
 function Page() {
   const searchParams = useSearchParams(); // Get the search parameters
-  const searchTerm = searchParams.get('s') || ""; // Extract the 's' parameter or default to an empty string
+  const searchTerm = searchParams.get('s') || ""; 
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <SearchComponent searchTerm={searchTerm} /> {/* Pass the search term as a prop */}
+      <SearchComponent searchTerm={searchTerm} /> 
     </Suspense>
   );
 }
