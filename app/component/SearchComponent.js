@@ -59,7 +59,7 @@ const SearchComponent = ({ searchTerm }) => {
           </div>
         </section>
       ) : (
-        <p>No results found for "{searchTerm}".</p>
+        <p>No results found for &quot;{searchTerm}&quot;.</p>
       )}
     </div>
   );
