@@ -1,11 +1,15 @@
 // component/SearchComponent.js
-"use client";
-import { useState, useEffect } from "react";
-import ProductCard from "./ProductCard";
-import { SkeletonLoader } from "../common/SkeletonLoader";
-import { getProducts } from "@/services/firebase";
+"use client"; // Forces this component to be client-side rendered
 
-const SearchComponent = ({ searchTerm }) => {
+import { useSearchParams } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import ProductCard from './ProductCard';
+import { SkeletonLoader } from '../common/SkeletonLoader';
+import { getProducts } from '@/services/firebase';
+
+const SearchComponent = () => {
+  const searchParams = useSearchParams(); // This should only run on the client
+  const searchTerm = searchParams.get('s') || ''; // Get the search query from the URL
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
@@ -59,7 +63,7 @@ const SearchComponent = ({ searchTerm }) => {
           </div>
         </section>
       ) : (
-        <p>No results found for &quot;{searchTerm}&quot;.</p>
+        <p>No results found for "{searchTerm}".</p>
       )}
     </div>
   );

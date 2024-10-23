@@ -1,25 +1,15 @@
-"use client"
-import React, { Suspense } from 'react';
+// app/products/page.js or your appropriate path
+import React from 'react';
 import SearchComponent from '../component/SearchComponent';
-import { useSearchParams } from 'next/navigation';
 
-/* export async function generateMetadata({ searchParams }) {
-  const { s } = searchParams; // Extract the search parameter
+export async function generateMetadata({ searchParams }) {
+  const { s } = searchParams; // Extract search param
   return {
-    title: `Search results for ${s}`, // Example of using the search term in the title
+    title: `Search results for ${s}`, // Example of dynamic title based on search term
     description: `Find products related to ${s}`,
   };
-} */
-
-function Page() {
-  const searchParams = useSearchParams(); 
-  const searchTerm = searchParams.get('s') || ""; 
-
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <SearchComponent searchTerm={searchTerm} /> 
-    </Suspense>
-  );
 }
 
-export default Page;
+export default function Page() {
+  return <SearchComponent />;
+}
