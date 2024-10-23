@@ -1,4 +1,3 @@
-
 import Header from "./common/Header";
 import "./globals.css";
 
@@ -14,11 +13,6 @@ const playfairDisplay = Playfair_Display({
   subsets: ['latin'],
 });
 
-const lobster = Lobster({
-  weight: '400',
-  subsets: ['latin'],
-});
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -26,10 +20,9 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
       </head>
-      <body className={`${playfairDisplay.className} `}>
-        
-      <Header/>
-        {children}
+      <body className={`${playfairDisplay.className} font-playfair` }>       
+            <Header />
+            {children}
       </body>
     </html>
   );

@@ -11,7 +11,7 @@ import {
 } from "react-icons/fa";
 import Link from "next/link";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product , showcartBtn }) => {
   const [quantity, setQuantity] = useState(1);
   const [isInCart, setIsInCart] = useState(false);
   const [isInWish, setIsInWish] = useState(false);
@@ -52,9 +52,11 @@ const ProductCard = ({ product }) => {
   );
 
   return (
-    <div className="bg-gray-100 rounded-lg shadow-lg overflow-hidden flex flex-col h-full">
-      <Link href={`/products/${product?.id}`} onClick={LoadingOverlay}>
-        <div className="relative group cursor-pointer flex-grow p-3 bg-white">
+    <>
+    {linkLoading && <LoadingOverlay/>}
+       <div className="bg-gray-100 rounded-lg shadow-lg overflow-hidden flex flex-col h-full">
+      <Link href={`/products/${product?.id}`} onClick={() => setLinkLoading(true)}>
+        <div className="relative group cursor-pointer flex-grow  bg-white">
           {loading && (
             <div className="absolute inset-0 flex items-center justify-center bg-gray-200">
               <div className="w-8 h-8 border-4 border-t-transparent border-[#A67B5B] rounded-full animate-spin"></div>
@@ -64,8 +66,8 @@ const ProductCard = ({ product }) => {
             src={product?.main_image}
             alt={product?.name}
             width={300}
-            height={300}
-            className={`w-full h-48 object-cover transition-opacity duration-300 ${loading ? 'opacity-0' : 'opacity-100'}`}
+            height={500}
+            className={`w-full  object-cover transition-opacity duration-300 contain ${loading ? 'opacity-0' : 'opacity-100'}`}
             onLoadingComplete={() => setLoading(false)}
           />
         </div>
@@ -80,10 +82,11 @@ const ProductCard = ({ product }) => {
       <div className="flex items-center mt-2">
         <span>₦</span>
           <span className="text-xl font-light">
-          {product?.price}
+          {product?.price.toLocaleString('en-US')}
           </span>
         </div>
-        <div className="flex gap-2  items-center justify-between mt-2">         
+        {
+          showcartBtn ? ( <div className="flex gap-2  items-center justify-between mt-2">         
           {isInCart ? (
             <div className="flex w-full max-w-40 justify-between bg-gray-100 py-1 items-center">
               <button
@@ -128,11 +131,15 @@ const ProductCard = ({ product }) => {
               <FaShare className="text-base md:text-xl" />
             </button>
           </div>
-        </div>
+        </div>) : <Link  href={`/products/${product?.id}`}  className="text-sm underline underline-offset-1">view product</Link>
+        }
+        
       </div>
        
       </div>
     </div>
+    </>
+ 
   );
 };
 

@@ -25,7 +25,7 @@ const ProductDetailsStatic = ({ product }) => {
           </div>
           <div className="flex-1 my-3">
             <h1 className="text-3xl font-bold mb-2">{product?.name}</h1>
-            <p className="text-xl text-green-600 mb-2">${product?.price}</p>
+            <p className="text-xl text-green-600 mb-2">    <span>₦</span>{product?.price.toLocaleString('en-US')}</p>
             <p className="mb-2">{product?.description}</p>
           <ProductDetailsClient name={product.name} />
           </div>

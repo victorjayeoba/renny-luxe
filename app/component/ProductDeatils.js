@@ -64,8 +64,11 @@ const ProductDetails = ({ product }) => {
   );
 
   return (
+
+    <>
+     {linkLoading && <LoadingOverlay />}
     <div className="container mx-auto px-4 py-10">
-      {linkLoading && <LoadingOverlay />}
+     
       
       {/* Main Product Section */}
       <div className="flex flex-col md:flex-row md:space-x-8">
@@ -203,6 +206,7 @@ const ProductDetails = ({ product }) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

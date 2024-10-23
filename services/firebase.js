@@ -9,6 +9,7 @@ export const getProducts = async () => {
         id: doc.id,
         ...doc.data(),
       }));
+  
       return products;
     } catch (error) {
       console.error("Error fetching products: ", error);
