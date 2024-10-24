@@ -20,8 +20,8 @@ const Wishlist = () => {
             ) : (
                 <div className="space-y-4">
                     {wishlist.map((item) => (
-                        <Link className='block' href={`/products/${item.id}`}>
-                             <div key={item.id} className="border rounded-lg p-4 shadow">
+                        <Link  key={item.id} className='block' href={`/products/${item.id}`}>
+                             <div className="border rounded-lg p-4 shadow">
                             <Image src={item.main_image} width={100} height={100}/>
                             <h2 className="text-xl font-semibold">{item.name}</h2>
                             <p className="text-gray-700">${item.price.toLocaleString()}</p>
