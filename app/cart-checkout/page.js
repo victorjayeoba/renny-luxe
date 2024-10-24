@@ -6,7 +6,7 @@ import { FaMinus, FaPlus, FaTrash, FaWhatsapp } from "react-icons/fa";
 
 const CheckoutPage = () => {
   // State for cart items
-  const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem("cartItems")) || []);
+  const [cartItems, setCartItems] = useState([]);
 
   // State for form fields
   const [fullName, setFullName] = useState("");
@@ -18,13 +18,18 @@ const CheckoutPage = () => {
 
   // Load cart items from localStorage on component mount
   useEffect(() => {
-    const storedCart = JSON.parse(localStorage.getItem("cartItems")) || [];
-    setCartItems(storedCart);
+    if (typeof window !== "undefined") {
+      // Only access localStorage on the client side
+      const storedCart = JSON.parse(localStorage.getItem("cartItems")) || [];
+      setCartItems(storedCart);
+    }
   }, []);
 
   // Save cart items to localStorage whenever cartItems state changes
   useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    if (typeof window !== "undefined") {
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    }
   }, [cartItems]);
 
   // Update item quantity
@@ -53,7 +58,6 @@ const CheckoutPage = () => {
 
   // Function to send checkout details to WhatsApp
   const sendToWhatsApp = () => {
-    // Check if all form fields are filled
     if (!fullName || !email || !address || !city || !postalCode || !country) {
       alert("Please fill in all the fields before proceeding.");
       return;
