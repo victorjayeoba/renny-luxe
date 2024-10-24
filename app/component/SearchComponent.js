@@ -37,34 +37,44 @@ const SearchComponent = () => {
 
   return (
     <div className="container mx-auto px-4 py-10">
-      <h1 className="text-3xl font-bold mb-6">Search Products</h1>
-
-      {filteredProducts.length > 0 ? (
-        <section className="pt-8">
-          <div className="mx-auto px-3 xl:px-6">
-            <div className="xl:container mx-auto py-8">
-              <h2 className="text-3xl font-bold text-center mb-6 text-[#A67B5B]">
-                Search Results
-              </h2>
-              <div className="grid grid-cols-2 gap-3 md:gap-6 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 justify-center">
-                {loading ? (
-                  Array.from({ length: 8 }).map((_, index) => (
-                    <SkeletonLoader key={index} />
-                  ))
-                ) : (
-                  filteredProducts.map((product) => (
-                    <div key={product.id}>
-                      <ProductCard product={product} showcartBtn={true} />
-                    </div>
-                  ))
-                )}
+     {filteredProducts.length > 0 ? (
+  <section className="pt-8">
+    <div className="mx-auto px-3 xl:px-6">
+      <h2 className="text-3xl font-bold text-start mb-6 text-[#A67B5B]">
+        Search Results
+      </h2>
+      <div className="xl:container mx-auto py-8">
+        <div className="grid grid-cols-2 gap-3 md:gap-6 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 justify-center">
+          {loading ? (
+            Array.from({ length: 8 }).map((_, index) => (
+              <SkeletonLoader key={index} />
+            ))
+          ) : (
+            filteredProducts.map((product) => (
+              <div key={product.id}>
+                <ProductCard product={product} showcartBtn={true} />
               </div>
-            </div>
-          </div>
-        </section>
-      ) : (
-        <p>No results found for  &quot;{searchTerm}&quot;.</p>
-      )}
+            ))
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+) : (
+  loading ? (
+    <div className="xl:container mx-auto grid grid-cols-2 gap-3 md:gap-6 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 justify-center">
+      {
+    Array.from({ length: 8 }).map((_, index) => (
+      <SkeletonLoader key={index} />
+    ))
+      }
+      </div>
+    )
+   : (
+   <p>No results found for &quot;{searchTerm}&quot;.</p>
+  )
+)}
+
     </div>
   );
 };

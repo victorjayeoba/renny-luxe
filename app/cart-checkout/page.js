@@ -1,78 +1,74 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FaMinus, FaPlus, FaTrash, FaWhatsapp } from "react-icons/fa";
-import products from "@/app/data/product"; // Mock data for cart items
-import product_9 from "@/app/assets/images/product_9.jpg";
-import product_10 from "@/app/assets/images/product_10.jpg";
 
 const CheckoutPage = () => {
-  const initialCartItems = [
-    {
-      id: 1,
-      name: "Glow Serum",
-      price: 25.99,
-      image: product_10,
-      quantity: 2,
-    },
-    {
-      id: 2,
-      name: "Herbal Moisturizer",
-      price: 18.5,
-      image: product_9,
-      quantity: 1,
-    },
-  ];
+  // State for cart items
+  const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem("cartItems")) || []);
 
-  const [cartItems, setCartItems] = useState(initialCartItems);
+  // State for form fields
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+  const [country, setCountry] = useState("");
 
+  // Load cart items from localStorage on component mount
+  useEffect(() => {
+    const storedCart = JSON.parse(localStorage.getItem("cartItems")) || [];
+    setCartItems(storedCart);
+  }, []);
+
+  // Save cart items to localStorage whenever cartItems state changes
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  // Update item quantity
   const updateQuantity = (id, type) => {
     setCartItems((prevItems) =>
       prevItems.map((item) =>
         item.id === id
           ? {
               ...item,
-              quantity:
-                type === "increment"
-                  ? item.quantity + 1
-                  : item.quantity > 1
-                  ? item.quantity - 1
-                  : item.quantity,
+              quantity: type === "increment" ? item.quantity + 1 : item.quantity > 1 ? item.quantity - 1 : item.quantity,
             }
           : item
       )
     );
   };
 
+  // Remove item from cart
   const removeItem = (id) => {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
   // Calculate totals
-  const subtotal = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
+  const subtotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
   const shipping = 0;
-
   const total = subtotal + shipping;
 
   // Function to send checkout details to WhatsApp
   const sendToWhatsApp = () => {
-    const phoneNumber = "2347026702294"; 
-    let message = "Checkout details:\n\n";
+    // Check if all form fields are filled
+    if (!fullName || !email || !address || !city || !postalCode || !country) {
+      alert("Please fill in all the fields before proceeding.");
+      return;
+    }
+
+    const phoneNumber = "2347026702294";
+    let message = `Checkout details:\n\nName: ${fullName}\nEmail: ${email}\nAddress: ${address}\nCity: ${city}\nPostal Code: ${postalCode}\nCountry: ${country}\n\n`;
 
     cartItems.forEach((item) => {
       message += `Product: ${item.name}\nQuantity: ${item.quantity}\n\n`;
     });
 
-    message += `Total: $${total.toFixed(2)}`;
+    message += `Total: ₦${total.toFixed(2)}`;
 
-    // WhatsApp link
-    const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
-      message
-    )}`;
+    const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
     window.open(whatsappLink, "_blank");
   };
@@ -87,24 +83,22 @@ const CheckoutPage = () => {
           <h2 className="text-2xl font-semibold mb-4">Your Cart</h2>
           {cartItems.length === 0 ? (
             <p>
-              Your cart is empty.{" "}
-              <Link href="/products">Continue shopping.</Link>
+              Your cart is empty. <Link href="/products">Continue shopping.</Link>
             </p>
           ) : (
             cartItems.map((item) => (
               <div key={item.id} className="flex gap-4 items-center mb-6">
                 <Image
-                  src={item.image.src}
+                  src={item.main_image}
                   width={100}
                   height={100}
                   alt={item.name}
                   className="rounded-lg"
                 />
-
                 <div className="flex flex-col items-center gap-3 basis-[60%]">
                   <div className="flex flex-col text-center ">
                     <h3 className="text-lg font-semibold line-clamp-2">{item.name}</h3>
-                    <p className="text-gray-600">${item.price}</p>
+                    <p className="text-gray-600">₦{item.price}</p>
                   </div>
 
                   {/* Quantity Control */}
@@ -124,8 +118,7 @@ const CheckoutPage = () => {
                     </button>
                   </div>
                 </div>
-
-                <div className="basis-[10%] ">
+                <div className="basis-[10%]">
                   <button
                     onClick={() => removeItem(item.id)}
                     className="text-red-500 ml-4 basis-[10%] mx-auto bg-slate-200 hover:bg-slate-400 p-5 rounded-full transition"
@@ -143,16 +136,15 @@ const CheckoutPage = () => {
           <h2 className="text-2xl font-semibold mb-4">Order Summary</h2>
           <div className="flex justify-between mb-2">
             <p>Subtotal</p>
-            <p>${subtotal.toFixed(2)}</p>
+            <p>₦{subtotal.toFixed(2)}</p>
           </div>
           <div className="flex justify-between mb-2">
-            <p>Transportation</p>
-            <p>${shipping.toFixed(2)}</p>
+            <p>Shipping</p>
+            <p>₦{shipping.toFixed(2)}</p>
           </div>
-
           <div className="flex justify-between font-bold text-lg mt-4">
             <p>Total</p>
-            <p>${total.toFixed(2)}</p>
+            <p>₦{total.toFixed(2)}</p>
           </div>
 
           {/* Checkout Form */}
@@ -162,32 +154,50 @@ const CheckoutPage = () => {
               <input
                 type="text"
                 placeholder="Full Name"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
                 className="p-2 border rounded-lg"
+                required
               />
               <input
                 type="email"
                 placeholder="Email Address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="p-2 border rounded-lg"
+                required
               />
               <input
                 type="text"
                 placeholder="Shipping Address"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
                 className="p-2 border rounded-lg"
+                required
               />
               <input
                 type="text"
                 placeholder="City"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
                 className="p-2 border rounded-lg"
+                required
               />
               <input
                 type="text"
                 placeholder="Postal Code"
+                value={postalCode}
+                onChange={(e) => setPostalCode(e.target.value)}
                 className="p-2 border rounded-lg"
+                required
               />
               <input
                 type="text"
                 placeholder="Country"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
                 className="p-2 border rounded-lg"
+                required
               />
             </form>
 

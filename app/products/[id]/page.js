@@ -50,24 +50,26 @@ const ProductDetailsPage = async ({ params }) => {
 
   return (
     <>
-      <ProductDetailsStatic product={product} />
-   { relatedProducts.length > 0 ? (
-      <div className="py-8 container px-3  mx-auto">
-        <h2 className="text-2xl font-bold mb-4">Related Products</h2>
-        <div className="overflow-x-auto">
-        <div className="grid grid-flow-col auto-cols-[minmax(180px,240px)] gap-6 justify-start">
-  {relatedProducts.map((product) => (
-    <div className="max-w-[240px] flex-shrink-0" key={product.id}>
-      <ProductCard product={product} />
-    </div>
-  ))}
+      <ProductDetailsStatic productID={id} />
+      { relatedProducts.length > 0 ? (
+  <div className="py-8 container px-3  mx-auto">
+    <h2 className="text-2xl font-bold mb-4">Related Products</h2>
+    <div className="overflow-x-auto">
+    <div className="grid grid-flow-col auto-cols-[minmax(180px,240px)] gap-6 justify-start">
+{relatedProducts.map((product) => (
+<div className="max-w-[240px] flex-shrink-0" key={product.id}>
+  <ProductCard product={product} />
+</div>
+))}
 </div>
 
-        </div>
-      </div>
-    ): (<p className="container mx-auto">NO RELATED PRODUCT AVAILABLE <Link href={"/products" } className="text-base text-red-700">Continue shopping</Link></p>)} 
+    </div>
+  </div>
+): (<p className="container mx-auto">NO RELATED PRODUCT AVAILABLE <Link href={"/products" } className="text-base text-red-700">Continue shopping</Link></p>)} 
     </>
   );
 };
 
 export default ProductDetailsPage;
+
+

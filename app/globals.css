@@ -8,6 +8,30 @@
   --background: #ffffff;
   --foreground: #171717;
 }
+/* Custom Scrollbar Styles */
+
+/* For Webkit browsers (Chrome, Safari, etc.) */
+::-webkit-scrollbar {
+  width: 6px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #f3e4e6; /* Background of the scrollbar track */
+  border-radius: 10px; /* Rounded corners for the track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e61b76; /* Color of the scrollbar thumb */
+  border-radius: 10px; /* Rounded corners for the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d4006e; /* Darker color on hover */
+}
+
+/* For Firefox */
+scrollbar-width: thin; /* Change scrollbar width */
+scrollbar-color: #e61b76 #f3e4e6; /* Thumb color and track color */
 
 .calc-height {
   min-height: calc(100svh - 100px); /* Replace 100px with your desired value */

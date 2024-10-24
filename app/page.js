@@ -68,7 +68,7 @@ export default function Home() {
           backgroundImage: `linear-gradient(rgba(255, 5, 5, 0.5), rgba(0, 0, 0, 0.94)), url(${heroImage.src})`,
         }}
       >
-            <Marquee speed={60} gradient={true} gradientColor={[255, 255, 255]} gradientWidth={100} pauseOnHover={true} className="text-sm">
+            <Marquee className="absolute top-0 left-0 text-sm" speed={60} gradient={true} gradientColor={[255, 255, 255]} gradientWidth={100} pauseOnHover={true} >
           {`🌟 FLASH SALE ALERT! 🌟 Get 40% OFF on all skincare products! 🧴✨ Hurry, while stocks last! 🛒 Shop now and glow up with our best-selling serums, creams, and more! 💖 Limited time only! ⏳ Don't miss out!`}
         </Marquee>
 
@@ -131,7 +131,7 @@ export default function Home() {
         </div>
 
 
-        <div className="text-center py-4">
+        <div className="text-center pb-2">
           <p className="text-sm md:text-base">Join our newsletter for exclusive offers!</p>
           <button className="mt-2 bg-[#A67B5B] text-white rounded-full px-4 py-2 hover:bg-[#946c4b] transition-colors duration-200">
             Subscribe
