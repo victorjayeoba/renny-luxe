@@ -1,7 +1,8 @@
 "use client"
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { FaHeart, FaRegHeart, FaShoppingCart } from 'react-icons/fa';
+import { FaHeart, FaRegHeart, FaShoppingBag, FaShoppingCart } from 'react-icons/fa';
+import { FiShoppingBag } from "react-icons/fi";
 
 import Link from "next/link";
 
@@ -26,9 +27,9 @@ export default function Header() {
 
         <div className="flex gap-3 items-center">
         <Link href={"/wishlist"}>
-            <FaRegHeart className="mr-1 cursor-pointer" />
+            <FaRegHeart className="mr-1 cursor-pointer md:hidden" />
           </Link>
-        <Link href={"/cart-checkout"}> <FaShoppingCart className="mr-1 cursor-pointer md:hidden" /></Link>
+        <Link href={"/cart-checkout"}> <FiShoppingBag className="mr-1 cursor-pointer md:hidden" /></Link>
           {/* Hamburger Icon for Mobile */}
           <button
             className="md:hidden flex items-center justify-center p-2 transition-transform transform hover:scale-110"
@@ -42,7 +43,7 @@ export default function Header() {
         <nav
           className={`flex-col hidden items-center md:flex gap-4 md:flex-row space-y-4 md:space-y-0 text-lg md:text-xl`}
         >
-          {["Home", "About", "Blog", "Services", "Contact"].map((item, index) => (
+          {["Home", "products"].map((item, index) => (
             <motion.a
               key={index}
               href="#"
@@ -54,7 +55,10 @@ export default function Header() {
               {item}
             </motion.a>
           ))}
-          <Link href={"/cart-checkout"}> <FaShoppingCart className="mr-1 cursor-pointer" /></Link>
+                  <Link href={"/wishlist"}>
+            <FaRegHeart className="mr-1 cursor-pointer " />
+          </Link>
+          <Link href={"/cart-checkout"}> <FiShoppingBag  className="mr-1 cursor-pointer" /></Link>
       
         </nav>
       </div>
@@ -67,7 +71,7 @@ export default function Header() {
       >
         <nav className={`flex-col md:hidden space-y-4 py-3`}>
           <ul className="flex flex-col gap-4">
-            {["Home", "About", "Blog", "Services", "Contact"].map((item, index) => (
+            {["Home", "products"].map((item, index) => (
               <li key={index}>
                 <motion.a
                   href="#"

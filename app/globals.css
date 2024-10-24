@@ -7,6 +7,9 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  /* For Firefox */
+scrollbar-width: thin; /* Change scrollbar width */
+scrollbar-color: #A67B5B #f3e4e6; /* Thumb color and track color */
 }
 /* Custom Scrollbar Styles */
 
@@ -21,17 +24,15 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #e61b76; /* Color of the scrollbar thumb */
+  background: #A67B5B; /* Color of the scrollbar thumb */
   border-radius: 10px; /* Rounded corners for the thumb */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #d4006e; /* Darker color on hover */
+  background: #d27126; /* Darker color on hover */
 }
 
-/* For Firefox */
-scrollbar-width: thin; /* Change scrollbar width */
-scrollbar-color: #e61b76 #f3e4e6; /* Thumb color and track color */
+
 
 .calc-height {
   min-height: calc(100svh - 100px); /* Replace 100px with your desired value */
