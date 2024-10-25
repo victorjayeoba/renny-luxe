@@ -10,10 +10,11 @@ const LocationMap = () => {
   const [isMounted, setIsMounted] = useState(false); // State to check if component is mounted
   const [selectedBranch, setSelectedBranch] = useState(null); // State for selected branch
 
-    // Create refs for input fields
-    const nameRef = useRef();
-    const emailRef = useRef();
-    const messageRef = useRef();
+  // Create refs for input fields
+  const nameRef = useRef();
+  const emailRef = useRef();
+  const messageRef = useRef();
+
   // Define branch locations
   const branches = [
     {
@@ -42,6 +43,7 @@ const LocationMap = () => {
       address: "Bodija Market, Ibadan, Oyo State, Nigeria",
     },
   ];
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -69,6 +71,7 @@ const LocationMap = () => {
       console.error("Form submission error:", error);
     }
   };
+
   useEffect(() => {
     setIsMounted(true); // Set mounted state to true after component mounts
   }, []);
