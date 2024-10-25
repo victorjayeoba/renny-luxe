@@ -6,7 +6,7 @@ import { FaMinus, FaPlus, FaTrash, FaWhatsapp } from "react-icons/fa";
 
 const CheckoutPage = () => {
   // State for cart items
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(typeof window !== "undefined" ? JSON.parse(localStorage.getItem("cartItems")) : []);
 
   // State for form fields
   const [fullName, setFullName] = useState("");
