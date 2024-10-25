@@ -51,32 +51,33 @@ const LocationMap = () => {
   const messageRef = useRef();
 
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevent default form submission behavior
-
-    // Get form data
+    event.preventDefault();
     const formData = new FormData(event.target);
-
-    // Send form data to Formspree
-    const response = await fetch("https://formspree.io/f/mldedvqj", {
-      method: "POST",
-      body: formData,
-      headers: {
-        Accept: "application/json",
-      },
-    });
-
-    if (response.ok) {
-      alert("Thanks for reaching out!");
-
-      // Clear input fields
-      nameRef.current.value = "";
-      emailRef.current.value = "";
-      messageRef.current.value = "";
-    } else {
+  
+    try {
+      const response = await fetch("https://formspree.io/f/mldedvqj", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+  
+      if (response.ok) {
+        alert("Thanks for reaching out!");
+        nameRef.current.value = "";
+        emailRef.current.value = "";
+        messageRef.current.value = "";
+      } else {
+        const errorData = await response.json();
+        alert(`Error: ${errorData.errors[0].message}`);
+      }
+    } catch (error) {
       alert("There was a problem submitting your form.");
+      console.error("Form submission error:", error);
     }
   };
-
+  
   useEffect(() => {
     setIsMounted(true); // Set mounted state to true after component mounts
   }, []);
