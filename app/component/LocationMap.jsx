@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react"; // Import useRef
+import { useRef, useEffect, useState } from "react"; // Import useRef, useEffect, and useState
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
@@ -14,6 +14,8 @@ L.Icon.Default.mergeOptions({
 });
 
 const LocationMap = () => {
+  const [isMounted, setIsMounted] = useState(false); // State to check if component is mounted
+
   // Define branch locations
   const branches = [
     {
@@ -74,6 +76,10 @@ const LocationMap = () => {
       alert("There was a problem submitting your form.");
     }
   };
+
+  useEffect(() => {
+    setIsMounted(true); // Set mounted state to true after component mounts
+  }, []);
 
   return (
     <div className="bg-pink-50 min-h-screen py-10 px-6 md:px-20 lg:px-40">
@@ -140,21 +146,24 @@ const LocationMap = () => {
       <section className="mb-12">
         <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">Our Locations</h2>
 
-        <MapContainer center={[9.0820, 8.6753]} zoom={6} className="h-96 w-full rounded-lg shadow-md">
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          />
-          {branches.map((branch, index) => (
-            <Marker key={index} position={branch.position}>
-              <Popup>
-                <strong>{branch.name}</strong>
-                <br />
-                {branch.address}
-              </Popup>
-            </Marker>
-          ))}
-        </MapContainer>
+        {/* Render the map only if the component is mounted */}
+        {isMounted && (
+          <MapContainer center={[9.0820, 8.6753]} zoom={6} className="h-96 w-full rounded-lg shadow-md">
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            />
+            {branches.map((branch, index) => (
+              <Marker key={index} position={branch.position}>
+                <Popup>
+                  <strong>{branch.name}</strong>
+                  <br />
+                  {branch.address}
+                </Popup>
+              </Marker>
+            ))}
+          </MapContainer>
+        )}
       </section>
     </div>
   );
