@@ -1,17 +1,17 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react"; // Import useRef, useEffect, and useState
-/* import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
- */
-/* // Set default marker icons
+
+// Set default marker icons
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png",
   iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
   shadowUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
-}); */
+});
 
 const LocationMap = () => {
   const [isMounted, setIsMounted] = useState(false); // State to check if component is mounted
@@ -148,7 +148,7 @@ const LocationMap = () => {
         <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">Our Locations</h2>
 
         {/* Render the map only if the component is mounted */}
-     {/*    {isMounted && (
+       {isMounted && (
           <MapContainer center={[9.0820, 8.6753]} zoom={6} className="h-96 w-full rounded-lg shadow-md">
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -164,7 +164,7 @@ const LocationMap = () => {
               </Marker>
             ))}
           </MapContainer>
-        )} */}
+        )} */
       </section>
     </div>
   );
