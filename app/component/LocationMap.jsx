@@ -1,10 +1,10 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react"; // Import useRef, useEffect, and useState
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+/* import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-
+ */
 /* // Set default marker icons
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -92,7 +92,7 @@ const LocationMap = () => {
 
       {/* Contact Form */}
       <section className="mb-12">
-        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
+        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
               Name
