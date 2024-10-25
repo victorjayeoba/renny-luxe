@@ -1,83 +1,44 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react"; // Import useRef, useEffect, and useState
-/* import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import L from "leaflet";
- */
-/* // Set default marker icons
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png",
-  iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
-  shadowUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
-}); */
+import React, { useRef, useEffect, useState } from "react";
+import { GoogleMap, LoadScript, Marker, InfoWindow } from "@react-google-maps/api";
+
+// Your Google Maps API key
+const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
 const LocationMap = () => {
   const [isMounted, setIsMounted] = useState(false); // State to check if component is mounted
+  const [selectedBranch, setSelectedBranch] = useState(null); // State for selected branch
 
   // Define branch locations
   const branches = [
     {
       name: "Lagos - Balogun Market",
-      position: [6.4541, 3.3947],
+      position: { lat: 6.4541, lng: 3.3947 },
       address: "Balogun Market, Lagos Island, Lagos, Nigeria",
     },
     {
       name: "Abuja - Wuse Market",
-      position: [9.0634, 7.4689],
+      position: { lat: 9.0634, lng: 7.4689 },
       address: "Wuse Market, Zone 5, Abuja, Nigeria",
     },
     {
       name: "Kano - Kurmi Market",
-      position: [12.0022, 8.5919],
+      position: { lat: 12.0022, lng: 8.5919 },
       address: "Kurmi Market, Kano, Nigeria",
     },
     {
       name: "Onitsha - Onitsha Main Market",
-      position: [6.1510, 6.7850],
+      position: { lat: 6.1510, lng: 6.7850 },
       address: "Onitsha Main Market, Anambra, Nigeria",
     },
     {
       name: "Ibadan - Bodija Market",
-      position: [7.3975, 3.9160],
+      position: { lat: 7.3975, lng: 3.9160 },
       address: "Bodija Market, Ibadan, Oyo State, Nigeria",
     },
   ];
 
-  // Create refs for input fields
-  const nameRef = useRef();
-  const emailRef = useRef();
-  const messageRef = useRef();
-
- const handleSubmit = async (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-  
-    try {
-      const response = await fetch("https://formspree.io/f/mldedvqj", {
-        method: "POST",
-        body: formData,
-        headers: {
-          Accept: "application/json",
-        },
-      });
-  
-      if (response.ok) {
-        alert("Thanks for reaching out!");
-        nameRef.current.value = "";
-        emailRef.current.value = "";
-        messageRef.current.value = "";
-      } else {
-        const errorData = await response.json();
-        alert(`Error: ${errorData.errors[0].message}`);
-      }
-    } catch (error) {
-      alert("There was a problem submitting your form.");
-      console.error("Form submission error:", error);
-    }
-  }; 
-  
   useEffect(() => {
     setIsMounted(true); // Set mounted state to true after component mounts
   }, []);
@@ -92,7 +53,7 @@ const LocationMap = () => {
 
       {/* Contact Form */}
       <section className="mb-12">
-        <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
               Name
@@ -104,7 +65,7 @@ const LocationMap = () => {
               type="text"
               placeholder="Your name"
               required
-              ref={nameRef} // Attach ref
+              ref={useRef()} // Attach ref
             />
           </div>
           <div className="mb-4">
@@ -118,7 +79,7 @@ const LocationMap = () => {
               type="email"
               placeholder="Your email"
               required
-              ref={emailRef} // Attach ref
+              ref={useRef()} // Attach ref
             />
           </div>
           <div className="mb-6">
@@ -132,7 +93,7 @@ const LocationMap = () => {
               rows="4"
               placeholder="Your message"
               required
-              ref={messageRef} // Attach ref
+              ref={useRef()} // Attach ref
             ></textarea>
           </div>
           <div className="flex items-center justify-center">
@@ -147,24 +108,35 @@ const LocationMap = () => {
       <section className="mb-12">
         <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">Our Locations</h2>
 
-        {/* Render the map only if the component is mounted */}
-     {/*    {isMounted && (
-          <MapContainer center={[9.0820, 8.6753]} zoom={6} className="h-96 w-full rounded-lg shadow-md">
-            <TileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            />
-            {branches.map((branch, index) => (
-              <Marker key={index} position={branch.position}>
-                <Popup>
-                  <strong>{branch.name}</strong>
-                  <br />
-                  {branch.address}
-                </Popup>
-              </Marker>
-            ))}
-          </MapContainer>
-        )} */}
+        {isMounted && (
+          <LoadScript googleMapsApiKey={GOOGLE_MAPS_API_KEY}>
+            <GoogleMap
+              mapContainerStyle={{ height: "400px", width: "100%" }}
+              center={{ lat: 9.0820, lng: 8.6753 }}
+              zoom={6}
+            >
+              {branches.map((branch, index) => (
+                <Marker
+                  key={index}
+                  position={branch.position}
+                  onClick={() => setSelectedBranch(branch)}
+                />
+              ))}
+              {selectedBranch && (
+                <InfoWindow
+                  position={selectedBranch.position}
+                  onCloseClick={() => setSelectedBranch(null)}
+                >
+                  <div>
+                    <strong>{selectedBranch.name}</strong>
+                    <br />
+                    {selectedBranch.address}
+                  </div>
+                </InfoWindow>
+              )}
+            </GoogleMap>
+          </LoadScript>
+        )}
       </section>
     </div>
   );
