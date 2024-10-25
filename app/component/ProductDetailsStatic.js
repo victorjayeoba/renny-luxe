@@ -100,7 +100,7 @@ const ProductDetailsStatic = ({ productID }) => {
             <SkeletonImage />
           ) : (
             <Image
-              src={currentImage || "/default-product.jpg"} // Use placeholder if no image is set
+              src={currentImage || <SkeletonImage/>} // Use placeholder if no image is set
               width={400}
               height={400}
               alt={product?.name || "Product Image"}

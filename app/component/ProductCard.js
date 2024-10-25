@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { FaHeart, FaRegHeart, FaPlus, FaMinus, FaShoppingCart, FaShare } from "react-icons/fa";
 import Link from "next/link";
+import { Toast } from "./Toast";
 
 const ProductCard = ({ product, showcartBtn }) => {
   const [quantity, setQuantity] = useState(1);
@@ -11,6 +12,7 @@ const ProductCard = ({ product, showcartBtn }) => {
   const [loading, setLoading] = useState(true);
   const [linkLoading, setLinkLoading] = useState(false);
   const [wishList, setWishList] = useState([]);
+  const [toastMessage, setToastMessage] = useState(null); // State for toast message
 
   useEffect(() => {
     // Load the wishlist from localStorage
@@ -56,7 +58,7 @@ const ProductCard = ({ product, showcartBtn }) => {
 
     localStorage.setItem("cartItems", JSON.stringify(updatedCart));
     setIsInCart(true);
-    alert(`Added ${quantity} ${product.name}(s) to cart!`);
+    setToastMessage(`Added ${quantity} ${product.name}(s) to cart!`); // Set toast message for cart
   };
 
   const updateCartQuantity = (newQuantity) => {
@@ -77,10 +79,12 @@ const ProductCard = ({ product, showcartBtn }) => {
       // Remove from wishlist
       updatedWishList = wishList.filter((p) => p.id !== product.id);
       setIsInWish(false);
+      setToastMessage(`${product.name} removed from wishlist!`); // Set toast message for removal
     } else {
       // Add to wishlist
       updatedWishList = [...wishList, product];
       setIsInWish(true);
+      setToastMessage(`${product.name} added to wishlist!`); // Set toast message for addition
     }
 
     setWishList(updatedWishList);
@@ -115,6 +119,8 @@ const ProductCard = ({ product, showcartBtn }) => {
   return (
     <>
       {linkLoading && <LoadingOverlay />}
+      {toastMessage && <Toast message={toastMessage} onClose={() => setToastMessage(null)} />} {/* Render toast */}
+
       <div className="bg-gray-100 rounded-lg shadow-lg overflow-hidden flex flex-col h-full">
         <Link href={`/products/${product?.id}`} onClick={() => setLinkLoading(true)}>
           <div className="relative group cursor-pointer flex-grow bg-white">

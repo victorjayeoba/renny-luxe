@@ -6,7 +6,12 @@ import { FaMinus, FaPlus, FaTrash, FaWhatsapp } from "react-icons/fa";
 
 const CheckoutPage = () => {
   // State for cart items
-  const [cartItems, setCartItems] = useState(typeof window !== "undefined" ? JSON.parse(localStorage.getItem("cartItems")) : []);
+  const [cartItems, setCartItems] = useState(() => {
+    if (typeof window !== "undefined") {
+      return JSON.parse(localStorage.getItem("cartItems")) || [];
+    }
+    return [];
+  });
 
   // State for form fields
   const [fullName, setFullName] = useState("");
@@ -15,15 +20,6 @@ const CheckoutPage = () => {
   const [city, setCity] = useState("");
   const [postalCode, setPostalCode] = useState("");
   const [country, setCountry] = useState("");
-
-  // Load cart items from localStorage on component mount
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      // Only access localStorage on the client side
-      const storedCart = JSON.parse(localStorage.getItem("cartItems")) || [];
-      setCartItems(storedCart);
-    }
-  }, []);
 
   // Save cart items to localStorage whenever cartItems state changes
   useEffect(() => {
@@ -39,7 +35,7 @@ const CheckoutPage = () => {
         item.id === id
           ? {
               ...item,
-              quantity: type === "increment" ? item.quantity + 1 : item.quantity > 1 ? item.quantity - 1 : item.quantity,
+              quantity: type === "increment" ? item.quantity + 1 : Math.max(item.quantity - 1, 1), // Ensure quantity doesn't go below 1
             }
           : item
       )
@@ -53,7 +49,7 @@ const CheckoutPage = () => {
 
   // Calculate totals
   const subtotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-  const shipping = 0;
+  const shipping = 0; // Modify this if you have shipping logic
   const total = subtotal + shipping;
 
   // Function to send checkout details to WhatsApp
@@ -80,7 +76,6 @@ const CheckoutPage = () => {
   return (
     <div className="container mx-auto py-12 px-3">
       <h1 className="text-3xl font-bold mb-8">Checkout</h1>
-
       {/* Cart Items Section */}
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="flex-1">

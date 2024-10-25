@@ -13,6 +13,8 @@ import campaign_4 from "@/app/assets/images/campaign_4.jpg";
 import { SkeletonLoader } from "./common/SkeletonLoader";
 import { useRouter } from 'next/navigation';
 import Footer from "./component/Footer";
+import NewsletterModal from "./component/Newsletter";
+import { Toast } from "./component/Toast";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -21,6 +23,8 @@ export default function Home() {
   const [linkLoading, setLinkLoading] = useState(false); // Loading state for link clicks
   const [searchTerm, setSearchTerm] = useState(""); // State for the search input
   const [suggestions, setSuggestions] = useState([]); // State for product suggestions
+  const [modalOpen, setModalOpen] = useState(false); // State for modal visibility
+  const [toastMessage, setToastMessage] = useState(null); // State for toast message
   const router = useRouter();
   useEffect(() => {
     const fetchProducts = async () => {
@@ -32,7 +36,7 @@ export default function Home() {
     };
 
     fetchProducts();
-  }, []); // Empty dependency array to run once
+  }, []);
 
   // Update suggestions based on searchTerm
   useEffect(() => {
@@ -54,14 +58,25 @@ export default function Home() {
   );
 
   const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent the default form submission
-    // Redirect to the desired route
-    router.push(`/products?s=${searchTerm}`); // Adjust the route and query parameters as needed
+    event.preventDefault();
+    router.push(`/products?s=${searchTerm}`);
   };
+  const handleNewsletterSubmit = (email) => {
+    setToastMessage("Thanks for subscribing!!", email)
+    setModalOpen(false); 
+  };
+const NewsletterModalClose=()=>{
+  setToastMessage("Thanks for subscribing!!")
+}
   return (
     <div className="bg-gray-100">
-      {linkLoading && <LoadingOverlay />}
-
+      {linkLoading && <LoadingOverlay />}    
+        {toastMessage && <Toast message={toastMessage} onClose={() => setToastMessage(null)} />}
+      <NewsletterModal
+        isOpen={modalOpen}
+        onClose={() =>   setModalOpen(false)}
+        onSubmit={handleNewsletterSubmit}
+      />
       {/* Intro Section */}
       <section
         className="relative text-white max-h-screen w-full flex flex-col justify-between bg-cover bg-center bg-fixed"
@@ -134,7 +149,7 @@ export default function Home() {
 
         <div className="text-center pb-2">
           <p className="text-sm md:text-base">Join our newsletter for exclusive offers!</p>
-          <button className="mt-2 bg-[#A67B5B] text-white rounded-full px-4 py-2 hover:bg-[#946c4b] transition-colors duration-200">
+          <button   onClick={() => setModalOpen(true)} className="mt-2 bg-[#A67B5B] text-white rounded-full px-4 py-2 hover:bg-[#946c4b] transition-colors duration-200">
             Subscribe
           </button>
         </div>

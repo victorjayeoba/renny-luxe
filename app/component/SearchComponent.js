@@ -1,16 +1,16 @@
 // component/SearchComponent.js
 
-"use client"; // Ensures this component runs client-side
+"use client"; 
 
-import { useSearchParams } from 'next/navigation'; // useSearchParams should only be used client-side
+import { useSearchParams } from 'next/navigation'; 
 import { useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
 import { SkeletonLoader } from '../common/SkeletonLoader';
 import { getProducts } from '@/services/firebase';
 
 const SearchComponent = () => {
-  const searchParams = useSearchParams(); // This works client-side
-  const searchTerm = searchParams.get('s') || ''; // Get the 's' parameter from the URL
+  const searchParams = useSearchParams(); 
+  const searchTerm = searchParams.get('s') || ''; 
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
@@ -36,10 +36,10 @@ const SearchComponent = () => {
   }, [searchTerm, products]);
 
   return (
-    <div className="container mx-auto px-4 py-10">
+    <div className="container mx-auto px-4 py-10 min-h-96">
      {filteredProducts.length > 0 ? (
   <section className="pt-8">
-    <div className="mx-auto px-3 xl:px-6">
+    <div className="mx-auto  xl:px-6">
       <h2 className="text-3xl font-bold text-start mb-6 text-[#A67B5B]">
         Search Results
       </h2>
