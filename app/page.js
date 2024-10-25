@@ -12,6 +12,7 @@ import campaign_3 from "@/app/assets/images/campaign_3.jpg";
 import campaign_4 from "@/app/assets/images/campaign_4.jpg";
 import { SkeletonLoader } from "./common/SkeletonLoader";
 import { useRouter } from 'next/navigation';
+import Footer from "./component/Footer";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -154,8 +155,8 @@ export default function Home() {
           </div>
           <Link href={"/products?s=serum"} onClick={() => setLinkLoading(true)}>
             <div className="text-center max-w-full lg:flex justify-center mt-8">
-              <Image src={campaign_3} width={500} height={500} className="basis-1/2" />
-              <Image src={campaign_2} width={500} height={500} className="basis-1/2" />
+              <Image src={campaign_3} alt={"serum advert"} width={500} height={500} className="basis-1/2" />
+              <Image src={campaign_2} alt={"serum advert"} width={500} height={500} className="basis-1/2" />
             </div>
           </Link>
         </div>
@@ -184,37 +185,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-800 text-gray-300 py-6">
-        <div className="container mx-auto px-6 flex justify-between items-center">
-          <div>
-            <a href="#" className="block hover:text-white">
-              Terms of Service
-            </a>
-            <a href="#" className="block hover:text-white">
-              Privacy Policy
-            </a>
-            <a href="#" className="block hover:text-white">
-              Refund Policy
-            </a>
-          </div>
-          <div className="flex space-x-4">
-            <a href="#" className="hover:text-white">
-              Facebook
-            </a>
-            <a href="#" className="hover:text-white">
-              Instagram
-            </a>
-            <a href="#" className="hover:text-white">
-              Twitter
-            </a>
-          </div>
-        </div>
-        <div className="text-center text-gray-400 mt-4">
-          © {new Date().getFullYear()} MyShop. All rights reserved.
-        </div>
-      </footer>
     </div>
   );
 }

@@ -129,7 +129,7 @@ const ProductCard = ({ product, showcartBtn }) => {
               width={300}
               height={300}
               className={`w-full object-cover transition-opacity duration-300 contain ${loading ? "opacity-0" : "opacity-100"}`}
-              onLoadingComplete={() => setLoading(false)}
+              onLoad={() => setLoading(false)}
             />
           </div>
         </Link>

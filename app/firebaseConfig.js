@@ -5,14 +5,15 @@ import { getFirestore } from "firebase/firestore"; // If using Firestore
 import { getDatabase } from "firebase/database"; // If using Realtime Database
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCJN4AuHqtq0SSCm3I4lmcDF8tR_PghLXM",
-    authDomain: "renny-shop.firebaseapp.com",
-    projectId: "renny-shop",
-    storageBucket: "renny-shop.appspot.com",
-    messagingSenderId: "12099061426",
-    appId: "1:12099061426:web:cdcf6fda5ddad4cf4d2bab",
-    measurementId: "G-3KXJKZ686F"
-  };
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
+};
+
 const app = initializeApp(firebaseConfig);
 export const firestore = getFirestore(app); // If using Firestore
 export const database = getDatabase(app); // If using Realtime Database

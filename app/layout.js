@@ -1,4 +1,5 @@
 import Header from "./common/Header";
+import Footer from "./component/Footer";
 import "./globals.css";
 
 import { Pacifico, Playfair_Display, Lobster } from '@next/font/google';
@@ -30,6 +31,7 @@ export default function RootLayout({ children }) {
       <body className={`${playfairDisplay.className} font-playfair`}>       
         <Header />
         {children}
+        <Footer/>
       </body>
     </html>
   );
