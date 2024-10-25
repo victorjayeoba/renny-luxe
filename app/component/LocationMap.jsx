@@ -10,6 +10,10 @@ const LocationMap = () => {
   const [isMounted, setIsMounted] = useState(false); // State to check if component is mounted
   const [selectedBranch, setSelectedBranch] = useState(null); // State for selected branch
 
+    // Create refs for input fields
+    const nameRef = useRef();
+    const emailRef = useRef();
+    const messageRef = useRef();
   // Define branch locations
   const branches = [
     {
@@ -38,7 +42,33 @@ const LocationMap = () => {
       address: "Bodija Market, Ibadan, Oyo State, Nigeria",
     },
   ];
-
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+  
+    try {
+      const response = await fetch("https://formspree.io/f/mldedvqj", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+  
+      if (response.ok) {
+        alert("Thanks for reaching out!");
+        nameRef.current.value = "";
+        emailRef.current.value = "";
+        messageRef.current.value = "";
+      } else {
+        const errorData = await response.json();
+        alert(`Error: ${errorData.errors[0].message}`);
+      }
+    } catch (error) {
+      alert("There was a problem submitting your form.");
+      console.error("Form submission error:", error);
+    }
+  };
   useEffect(() => {
     setIsMounted(true); // Set mounted state to true after component mounts
   }, []);
@@ -53,7 +83,7 @@ const LocationMap = () => {
 
       {/* Contact Form */}
       <section className="mb-12">
-        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
               Name
@@ -65,7 +95,7 @@ const LocationMap = () => {
               type="text"
               placeholder="Your name"
               required
-              ref={useRef()} // Attach ref
+              ref={nameRef} // Attach ref
             />
           </div>
           <div className="mb-4">
@@ -79,7 +109,7 @@ const LocationMap = () => {
               type="email"
               placeholder="Your email"
               required
-              ref={useRef()} // Attach ref
+              ref={emailRef} // Attach ref
             />
           </div>
           <div className="mb-6">
@@ -93,7 +123,7 @@ const LocationMap = () => {
               rows="4"
               placeholder="Your message"
               required
-              ref={useRef()} // Attach ref
+              ref={messageRef} // Attach ref
             ></textarea>
           </div>
           <div className="flex items-center justify-center">
