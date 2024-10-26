@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { FaHeart, FaMinus, FaPlus, FaRegHeart, FaShare, FaShoppingCart } from "react-icons/fa";
+import { FaHeart, FaLink, FaMinus, FaPlus, FaRegHeart, FaShare, FaShoppingCart } from "react-icons/fa";
 import { Toast } from "./Toast"; // Import your Toast component
+import Link from "next/link";
+import { FiShoppingBag } from "react-icons/fi";
 
 const ProductDetailsClient = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
@@ -132,7 +134,9 @@ const ProductDetailsClient = ({ product }) => {
             <FaShare className="text-base md:text-xl" />
           </button>
         </div>
+       
       </div>
+      <div className="mt-3 text-[#A67B5B]" ><Link className="flex item-center underline-offset-1 gap-2" href={"/cart-checkout"}> <p>Take me to my cart </p><FiShoppingBag className="mt-1"/> </Link></div>
     </div>
   );
 };

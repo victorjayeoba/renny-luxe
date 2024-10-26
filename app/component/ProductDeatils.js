@@ -5,6 +5,7 @@ import products from "@/app/data/product"; // Adjust this path as necessary
 import Image from "next/image";
 import {
   FaHeart,
+  FaLink,
   FaMinus,
   FaPlus,
   FaRegHeart,
@@ -134,7 +135,9 @@ const ProductDetails = ({ product }) => {
                 <FaShare className="text-base md:text-xl" />
               </button>
             </div>
+     
           </div>
+          
         </div>
       </div>
 

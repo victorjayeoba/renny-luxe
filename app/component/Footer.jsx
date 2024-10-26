@@ -78,6 +78,9 @@ function Footer() {
 
  
       <div className="text-center text-gray-400 mt-4">
+      <p className="text-sm px-3">
+    This website is for project purposes only. The products displayed are not owned by or affiliated with the site creator.
+  </p> <br/>
         © {new Date().getFullYear()} Rennys-luxe. All rights reserved.
       </div>
     </footer>
