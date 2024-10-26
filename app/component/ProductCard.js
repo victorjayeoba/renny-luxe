@@ -113,7 +113,7 @@ const ProductCard = ({ product, showcartBtn }) => {
   const LoadingOverlay = () => (
     <div className="fixed inset-0 flex space-x-2 backdrop-blur-lg items-center justify-center bg-slate-100 bg-opacity-50 z-50">
     <div className="w-16 h-16 border-4 border-t-transparent border-[#A67B5B] rounded-full animate-spin"></div>
-    <p>Requesting product from server...<</p>
+    <p>Requesting product from server...</p>
   </div>
   );
 
