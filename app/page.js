@@ -99,9 +99,7 @@ const NewsletterModalClose=()=>{
           <p className="mt-4 text-lg md:text-xl lg:text-2xl">
             Discover our exclusive range of skincare products designed for a radiant and glowing complexion.
           </p>
-          <p className="mt-2 text-sm md:text-base lg:text-lg text-gray-300">
-            Unleash the beauty within you with our all-natural ingredients!
-          </p>
+        
           <form onSubmit={handleSubmit} className="rounded-3xl relative bg-slate-200 max-w-full mx-auto md:w-full md:max-w-5xl md:min-w-96 flex text-lg text-gray-950 my-6 shadow-2xl drop-shadow-2xl">
             <input
               className="h-12 block py-3 rounded-l-3xl flex-grow max-w-[80%] px-4 placeholder:text-lg placeholder:leading-9"
