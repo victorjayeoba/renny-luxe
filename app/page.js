@@ -52,8 +52,9 @@ export default function Home() {
 
   // Overlay component
   const LoadingOverlay = () => (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="w-16 h-16 border-4 border-t-transparent border-[#A67B5B] rounded-full animate-spin"></div>
+    <div className="fixed inset-0 flex space-x-2 backdrop-blur-lg items-center justify-center bg-slate-100 bg-opacity-50 z-50">
+    <div className="w-16 h-16 border-4 border-t-transparent border-[#A67B5B] rounded-full animate-spin"></div>
+    <p>Requestng product from server...</p>
     </div>
   );
 

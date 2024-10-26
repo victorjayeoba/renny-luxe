@@ -111,9 +111,10 @@ const ProductCard = ({ product, showcartBtn }) => {
   };
 
   const LoadingOverlay = () => (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="w-16 h-16 border-4 border-t-transparent border-[#A67B5B] rounded-full animate-spin"></div>
-    </div>
+    <div className="fixed inset-0 flex space-x-2 backdrop-blur-lg items-center justify-center bg-slate-100 bg-opacity-50 z-50">
+    <div className="w-16 h-16 border-4 border-t-transparent border-[#A67B5B] rounded-full animate-spin"></div>
+    <p>Please Wait... Fetching product...</p>
+  </div>
   );
 
   return (
@@ -150,11 +151,11 @@ const ProductCard = ({ product, showcartBtn }) => {
               <div className="flex gap-2 items-center justify-between mt-2">
                 {isInCart ? (
                   <div className="flex w-full max-w-40 justify-between bg-gray-100 py-1 items-center">
-                    <button onClick={handleDecrement} className="text-black py-1 px-2 rounded-l bg-[#A67B5B] hover:bg-gray-400 transition">
+                    <button onClick={handleDecrement} className="text-black py-1 px-2 rounded-l bg-[#A67B5B] active:bg-gray-400 transition">
                       <FaMinus color="#ffffff" />
                     </button>
                     <span className="mx-2">{quantity}</span>
-                    <button onClick={handleIncrement} className="text-black py-1 px-2 rounded-r bg-[#A67B5B] hover:bg-gray-400 transition">
+                    <button onClick={handleIncrement} className="text-black py-1 px-2 rounded-r bg-[#A67B5B] active:bg-gray-400 transition">
                       <FaPlus color="#ffffff" />
                     </button>
                   </div>

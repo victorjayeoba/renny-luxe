@@ -68,7 +68,7 @@ const ProductDetailsStatic = ({ productID }) => {
               );
             })
           ) : (
-            <p>No additional images available</p>
+            <p>No additional<br/> images available</p>
           )}
 
           {/* Main Image */}

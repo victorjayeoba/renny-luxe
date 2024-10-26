@@ -66,7 +66,7 @@ const CheckoutPage = () => {
       message += `Product: ${item.name}\nQuantity: ${item.quantity}\n\n`;
     });
 
-    message += `Total: ₦${total.toFixed(2)}`;
+    message += `Total: ₦${total.toLocaleString()}`;
 
     const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
@@ -86,7 +86,7 @@ const CheckoutPage = () => {
             </p>
           ) : (
             cartItems.map((item) => (
-              <div key={item.id} className="flex gap-4 items-center mb-6">
+              <div key={item.id} className="flex gap-4 items-center mb-6 pb-3 border-b-2">
                 <Image
                   src={item.main_image}
                   width={100}
@@ -97,7 +97,7 @@ const CheckoutPage = () => {
                 <div className="flex flex-col items-center gap-3 basis-[60%]">
                   <div className="flex flex-col text-center ">
                     <h3 className="text-lg font-semibold line-clamp-2">{item.name}</h3>
-                    <p className="text-gray-600">₦{item.price}</p>
+                    <p className="text-gray-600">₦{item.price.toLocaleString()}</p>
                   </div>
 
                   {/* Quantity Control */}
@@ -120,9 +120,9 @@ const CheckoutPage = () => {
                 <div className="basis-[10%]">
                   <button
                     onClick={() => removeItem(item.id)}
-                    className="text-red-500 ml-4 basis-[10%] mx-auto bg-slate-200 hover:bg-slate-400 p-5 rounded-full transition"
+                    className="text-red-500 ml-4 basis-[10%] mx-auto bg-slate-200 active:bg-slate-400 p-3 rounded-full transition"
                   >
-                    <FaTrash />
+                    <FaTrash size={16} />
                   </button>
                 </div>
               </div>
@@ -135,15 +135,15 @@ const CheckoutPage = () => {
           <h2 className="text-2xl font-semibold mb-4">Order Summary</h2>
           <div className="flex justify-between mb-2">
             <p>Subtotal</p>
-            <p>₦{subtotal.toFixed(2)}</p>
+            <p>₦{subtotal.toLocaleString()}</p>
           </div>
           <div className="flex justify-between mb-2">
             <p>Shipping</p>
-            <p>₦{shipping.toFixed(2)}</p>
+            <p>₦{shipping.toLocaleString()}</p>
           </div>
           <div className="flex justify-between font-bold text-lg mt-4">
             <p>Total</p>
-            <p>₦{total.toFixed(2)}</p>
+            <p>₦{total.toLocaleString()}</p>
           </div>
 
           {/* Checkout Form */}

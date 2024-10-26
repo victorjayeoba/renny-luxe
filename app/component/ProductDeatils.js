@@ -58,18 +58,17 @@ const ProductDetails = ({ product }) => {
 
   // Overlay component
   const LoadingOverlay = () => (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="w-16 h-16 border-4 border-t-transparent border-blue-500 rounded-full animate-spin"></div>
-    </div>
+    <div className="fixed inset-0 flex space-x-2 backdrop-blur-lg items-center justify-center bg-slate-100 bg-opacity-50 z-50">
+    <div className="w-16 h-16 border-4 border-t-transparent border-[#A67B5B] rounded-full animate-spin"></div>
+    <p>Please Wait... </p>
+  </div>
   );
 
   return (
 
     <>
      {linkLoading && <LoadingOverlay />}
-    <div className="container mx-auto px-4 py-10">
-     
-      
+    <div className="container mx-auto px-4 py-10"> 
       {/* Main Product Section */}
       <div className="flex flex-col md:flex-row md:space-x-8">
         <div className="flex-1 flex items-center justify-center">

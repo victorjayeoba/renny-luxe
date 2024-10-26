@@ -12,7 +12,7 @@ const NewsletterModal = ({ isOpen, onClose, onSubmit }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-white rounded-lg p-6 shadow-lg max-w-sm mx-auto">
+      <div className="bg-white rounded-lg p-6 shadow-lg w-[90%] max-w-lg mx-auto">
         <h2 className="text-lg font-bold mb-4">Subscribe to our Newsletter</h2>
         <form onSubmit={handleSubmit}>
           <input

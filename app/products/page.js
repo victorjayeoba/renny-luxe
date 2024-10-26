@@ -15,7 +15,7 @@ export async function generateMetadata({ searchParams }) {
 // Ensure to wrap in Suspense
 export default function Page() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div className='min-h-screen'>Loading...</div>}>
       <SearchComponent />
     </Suspense>
   );

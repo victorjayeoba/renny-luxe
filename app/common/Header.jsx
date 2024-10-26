@@ -1,18 +1,17 @@
 "use client";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaRegHeart } from "react-icons/fa";
+import { FaHeadset, FaRegHeart } from "react-icons/fa";
 import { FiShoppingBag } from "react-icons/fi";
 import Link from "next/link";
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false); 
-  const [isFixed, setIsFixed] = useState(false); 
-
+  const [isOpen, setIsOpen] = useState(false);
+  const [isFixed, setIsFixed] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 100) {
+      if (window.scrollY > 200) {
         setIsFixed(true);
       } else {
         setIsFixed(false);
@@ -27,8 +26,10 @@ export default function Header() {
 
   return (
     <AnimatePresence>
-      <motion.header
-        className={`z-50 bg-gray-800 ${isFixed ? "fixed top-0 w-full shadow-lg" : "relative"} transition-all duration-300`}
+      <div className="bg-gray-800 ">      <motion.header
+        className={`z-50 bg-gray-800 ${
+          isFixed ? "fixed top-0 w-full shadow-lg" : "relative"
+        } transition-all duration-300`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         exit={{ y: -100 }}
@@ -63,11 +64,15 @@ export default function Header() {
           </div>
 
           {/* Nav Links */}
-          <nav className={`hidden md:flex gap-4 text-lg`}>
-            {[{ label: "Home", link: "/" }, { label: "Products", link: "/products" }].map((item, index) => (
+          <nav className={`hidden md:flex item-center gap-4 text-lg`}>
+            {[
+              { label: "Home", link: "/" },
+              { label: "Products", link: "/products" },
+            ].map((item, index) => (
               <motion.a
                 key={index}
                 href={item.link}
+                target="_blank"
                 className="text-slate-100 hover:text-white transition duration-300 transform hover:scale-105"
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -76,12 +81,21 @@ export default function Header() {
                 {item.label}
               </motion.a>
             ))}
-            <Link href={"/wishlist"}>
-              <FaRegHeart className="mr-1 cursor-pointer" />
-            </Link>
-            <Link href={"/cart-checkout"}>
-              <FiShoppingBag className="mr-1 cursor-pointer" />
-            </Link>
+            <div className="flex items-center">
+              <Link href={"/contact-us"}>
+                <FaHeadset  className="mr-1 cursor-pointer" />
+              </Link>
+            </div>
+            <div className="flex items-center">
+              <Link href={"/wishlist"}>
+                <FaRegHeart className="mr-1 cursor-pointer" />
+              </Link>
+            </div>
+            <div className="flex items-center">
+              <Link href={"/cart-checkout"}>
+                <FiShoppingBag className="mr-1 cursor-pointer" />
+              </Link>
+            </div>
           </nav>
         </div>
 
@@ -93,13 +107,19 @@ export default function Header() {
         >
           <nav className="flex-col space-y-4 py-3">
             <ul className="flex flex-col gap-4">
-              {[{ label: "Home", link: "/" }, { label: "Products", link: "/products" }].map((item, index) => (
+              {[
+                { label: "Home", link: "/" },
+                { label: "Products", link: "/products" },
+                { label: "Customer Care", link: "/contact-us" },
+              ].map((item, index) => (
                 <li key={index}>
                   <motion.a
                     href={item.link}
                     className="text-gray-600 hover:text-gray-900 transition duration-300 transform hover:scale-105"
                     initial={{ y: -10, opacity: 0 }}
-                    animate={isOpen ? { y: 0, opacity: 1 } : { y: -10, opacity: 0 }}
+                    animate={
+                      isOpen ? { y: 0, opacity: 1 } : { y: -10, opacity: 0 }
+                    }
                     transition={{ delay: index * 0.1 }}
                   >
                     {item.label}
@@ -109,7 +129,8 @@ export default function Header() {
             </ul>
           </nav>
         </motion.div>
-      </motion.header>
+      </motion.header></div>
+
     </AnimatePresence>
   );
 }

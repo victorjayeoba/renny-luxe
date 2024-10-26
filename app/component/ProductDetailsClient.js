@@ -103,16 +103,16 @@ const ProductDetailsClient = ({ product }) => {
 
   return (
     <div className="mt-6">
-      {toastMessage && <Toast message={toastMessage} onClose={() => setToastMessage(null)} />} {/* Render toast */}
+      {toastMessage && <Toast message={toastMessage} onClose={() => setToastMessage(null)} />} 
 
       <div className="flex gap-4 items-center mt-4">
         {isInCart && quantity !== 0 ? (
-          <div className="flex w-full max-w-40 justify-between bg-gray-100 py-1 items-center">
-            <button onClick={() => { handleDecrement(); updateCartQuantity(quantity - 1); }} className="text-black py-1 px-2 rounded-l bg-[#A67B5B] hover:bg-gray-400 transition">
+          <div className="flex w-full max-w-32 justify-between  items-center">
+            <button onClick={() => { handleDecrement(); updateCartQuantity(quantity - 1); }} className="text-black py-2 px-2 rounded-l bg-[#A67B5B] active:bg-gray-400 transition">
               <FaMinus color="#ffffff" />
             </button>
             <span className="mx-2">{quantity}</span>
-            <button onClick={() => { handleIncrement(); updateCartQuantity(quantity + 1); }} className="text-black py-1 px-2 rounded-r bg-[#A67B5B] hover:bg-gray-400 transition">
+            <button onClick={() => { handleIncrement(); updateCartQuantity(quantity + 1); }} className="text-black py-2 px-2 rounded-r bg-[#A67B5B] active:bg-gray-400 transition">
               <FaPlus color="#ffffff" />
             </button>
           </div>
