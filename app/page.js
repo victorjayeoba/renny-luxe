@@ -57,6 +57,14 @@ export default function Home() {
     <p>Requestng product from server...</p>
     </div>
   );
+  // Timer to open the newsletter modal after 20 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setModalOpen(true);
+    }, 20000); 
+
+    return () => clearTimeout(timer); // Clean up the timer on unmount
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -96,15 +104,15 @@ const NewsletterModalClose=()=>{
               Natural Beauty
             </span>
           </h1>
-          <p className="mt-4 text-lg md:text-xl lg:text-2xl">
+          <p className="mt-2 text-lg md:text-xl lg:text-2xl">
             Discover our exclusive range of skincare products designed for a radiant and glowing complexion.
           </p>
         
-          <form onSubmit={handleSubmit} className="rounded-3xl relative bg-slate-200 max-w-full mx-auto md:w-full md:max-w-5xl md:min-w-96 flex text-lg text-gray-950 my-6 shadow-2xl drop-shadow-2xl">
+          <form onSubmit={handleSubmit} className="rounded-3xl relative bg-slate-200 min-w-[95%] max-w-full mx-auto md:w-full md:max-w-5xl md:min-w-96 flex text-lg text-gray-950 my-6 shadow-2xl drop-shadow-2xl">
             <input
-              className="h-12 block py-3 rounded-l-3xl flex-grow max-w-[80%] px-4 placeholder:text-lg placeholder:leading-9"
+              className="h-12 block py-3 rounded-l-3xl  flex-grow max-w-[80%] px-4 placeholder:text-lg placeholder:leading-9"
               type="search"
-              placeholder="Search for products and items"
+              placeholder="Search for skin care products and items"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -130,8 +138,10 @@ const NewsletterModalClose=()=>{
           
     
 {
-  suggestions.length == 0 &&   <div className="flex text-start justify-start max-w-full mx-auto md:max-w-xl gap-2 text-sm text-gray-400">
-  <Link href={`/products?s=Serum`} className="border-[1px] rounded-full p-1 px-3 hover:text-gray-50 shadow-2xl transition-transform transform hover:scale-105">
+  suggestions.length == 0 &&   <div className="xl:flex text-start items-center justify-start max-w-full mx-auto md:max-w-xl gap-2 text-sm text-gray-400">
+   <h3 className="text-white text-center text-lg ">Search by caregory:</h3>
+   <div className="flex text-start justify-start max-w-full mx-auto md:max-w-xl gap-2 text-sm text-gray-400">
+   <Link href={`/products?s=Serum`} className="border-[1px] rounded-full p-1 px-3 hover:text-gray-50 shadow-2xl transition-transform transform hover:scale-105">
     Serum
   </Link>
   <Link  href={`/products?s=cream`} className="border-[1px] rounded-full p-1 px-3 hover:text-gray-50 transition-transform transform hover:scale-105">
@@ -140,6 +150,8 @@ const NewsletterModalClose=()=>{
   <Link  href={`/products?s=Moisturizer`} className="border-[1px] rounded-full p-1 px-3 hover:text-gray-50 transition-transform transform hover:scale-105">
     Moisturizer
   </Link>
+   </div>
+
 </div>
 }
         
