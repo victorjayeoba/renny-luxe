@@ -88,7 +88,7 @@ const NewsletterModalClose=()=>{
           {`🌟 FLASH SALE ALERT! 🌟 Get 40% OFF on all skincare products! 🧴✨ Hurry, while stocks last! 🛒 Shop now and glow up with our best-selling serums, creams, and more! 💖 Limited time only! ⏳ Don't miss out!`}
         </Marquee>
 
-        <div className="relative py-6 pb-10 min-h-[70vh] flex items-center justify-center flex-col text-center h-full font-playfair mx-auto px-4 sm:px-6 lg:px-8 xl:w-3/4">
+        <div className="relative py-10 pb-10  flex items-center justify-center flex-col text-center h-full font-playfair mx-auto px-4 sm:px-6 lg:px-8 xl:w-3/4">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">
             <span> Radiate Your</span> <br className="2xl:hidden" />
             <span className="text-5xl md:text-7xl lg:text-8xl font-black shimmer">
@@ -169,9 +169,9 @@ const NewsletterModalClose=()=>{
             ))}
           </div>
           <Link href={"/products?s=serum"} onClick={() => setLinkLoading(true)}>
-            <div className="text-center max-w-full lg:flex justify-center mt-8">
-              <Image src={campaign_3} alt={"serum advert"} width={500} height={500} className="basis-1/2" />
-              <Image src={campaign_2} alt={"serum advert"} width={500} height={500} className="basis-1/2" />
+            <div className="text-center mx-auto max-w-full lg:flex justify-center mt-8">
+              <Image src={campaign_3} alt={"serum advert"} width={500} height={500} className=" inline-block mx-auto basis-1/2" />
+              <Image src={campaign_2} alt={"serum advert"} width={500} height={500} className="inline-block mx-auto  basis-1/2" />
             </div>
           </Link>
         </div>
