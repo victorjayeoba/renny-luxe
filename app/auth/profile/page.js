@@ -1,9 +1,9 @@
 "use client"
-import Profile from "@/app/component/Profle"
+import ProfileComponent from "@/app/component/ProfileComponent"
 function page() {
 
   return (
-   <Profile/>
+   <ProfileComponent/>
   )
 }
 
