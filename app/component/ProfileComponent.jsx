@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { login } from '@/app/features/user'
 import { logout } from '@/app/features/user'
 import { switchTheme } from '@/app/features/themeColor'
-export const ProfileComponent=()=> {
+export default const ProfileComponent=()=> {
   const [color , setColor] = useState("")
   const user = useSelector((state)=>state.user.value)
   const themeColor = useSelector((state)=>state.themeSwitch.value)
