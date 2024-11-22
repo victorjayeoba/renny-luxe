@@ -1,8 +1,12 @@
+"use client"
 import Header from "./common/Header";
 import Footer from "./component/Footer";
 import "./globals.css";
-
+import { configureStore } from "@reduxjs/toolkit";
+import { Provider } from "react-redux";
+import userReducer from "@/app/features/user"
 import { Pacifico, Playfair_Display, Lobster } from '@next/font/google';
+
 
 const pacifico = Pacifico({
   weight: '400',
@@ -15,6 +19,11 @@ const playfairDisplay = Playfair_Display({
 });
 
 export default function RootLayout({ children }) {
+  const store = configureStore({
+    reducer:{
+      user : userReducer,
+    }
+  })
   return (
     <html lang="en">
       <head>
@@ -29,9 +38,11 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="./favicon.ico" /> 
       </head>
       <body className={`${playfairDisplay.className} font-playfair`}>       
+        <Provider store={store} >
         <Header />
         {children}
         <Footer/>
+        </Provider>
       </body>
     </html>
   );
