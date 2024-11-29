@@ -1,7 +1,7 @@
 // app/products/[id]/page.js
 import { getProducts } from "@/services/firebase"; // Adjust the path as necessary
 import ProductDetailsStatic from "@/app/component/ProductDetailsStatic";
-import { getReatedProducts } from "@/app/component/RelatedProduct";
+import { getReatedProducts, getRelatedProducts } from "@/app/component/RelatedProduct";
 import Image from "next/image";
 import ProductCard from "@/app/component/ProductCard";
 import Link from "next/link";
@@ -46,7 +46,7 @@ const ProductDetailsPage = async ({ params }) => {
     return <div>Product not found</div>;
   }
 
- const relatedProducts = getReatedProducts(product.related_products,products)
+ const relatedProducts = getRelatedProducts(product.related_products,products)
 
   return (
     <>
@@ -58,7 +58,7 @@ const ProductDetailsPage = async ({ params }) => {
     <div className="grid grid-flow-col auto-cols-[minmax(180px,240px)] gap-6 justify-start">
 {relatedProducts.map((product) => (
 <div className="max-w-[240px] flex-shrink-0" key={product.id}>
-  <ProductCard product={product} />
+  <ProductCard product={ JSON.parse(JSON.stringify(product))} />
 </div>
 ))}
 </div>
