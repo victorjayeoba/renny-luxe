@@ -1,12 +1,12 @@
-"use client"
+"use client";
 import Header from "./common/Header";
 import Footer from "./component/Footer";
 import "./globals.css";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
-import userReducer from "@/app/features/user"
-import { Pacifico, Playfair_Display, Lobster } from '@next/font/google';
-
+import userReducer from "@/app/features/user";
+import { Pacifico, Playfair_Display } from '@next/font/google';
+import Script from "next/script";
 
 const pacifico = Pacifico({
   weight: '400',
@@ -20,10 +20,11 @@ const playfairDisplay = Playfair_Display({
 
 export default function RootLayout({ children }) {
   const store = configureStore({
-    reducer:{
-      user : userReducer,
-    }
-  })
+    reducer: {
+      user: userReducer,
+    },
+  });
+
   return (
     <html lang="en">
       <head>
@@ -37,11 +38,28 @@ export default function RootLayout({ children }) {
         <meta charSet="UTF-8" />
         <link rel="icon" href="./favicon.ico" /> 
       </head>
-      <body className={`${playfairDisplay.className} font-playfair`}>       
-        <Provider store={store} >
-        <Header />
-        {children}
-        <Footer/>
+      <body className={`${playfairDisplay.className} font-playfair`}>
+        {/* Adsterra script */}
+        <Script id="adsterra-config" strategy="afterInteractive">
+          {`
+            atOptions = {
+              'key': '5523f85d85655310e1bfe15c05164232',
+              'format': 'iframe',
+              'height': 60,
+              'width': 468,
+              'params': {}
+            };
+          `}
+        </Script>
+        <Script
+          src="//www.highperformanceformat.com/5523f85d85655310e1bfe15c05164232/invoke.js"
+          strategy="afterInteractive"
+        />
+
+        <Provider store={store}>
+          <Header />
+          {children}
+          <Footer />
         </Provider>
       </body>
     </html>
