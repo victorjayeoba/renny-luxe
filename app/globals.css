@@ -65,3 +65,6 @@ scrollbar-color: #A67B5B #f3e4e6; /* Thumb color and track color */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+iframe{
+  max-width: 100%;
+}
